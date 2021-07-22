@@ -1,7 +1,7 @@
 import React from "react";
 import Expense from "./components/Expenses/Expense";
 
-function App() {
+const App = () => { // Arrow function
 
 	let expense = [
 		{ name: "Grocery", amt: 250.00, date: new Date(2021, 2, 28) },
@@ -25,6 +25,6 @@ function App() {
 	// 		<Expense items={expense} />
 	// 	</div>
 	// );
-}
+};
 
 export default App;
