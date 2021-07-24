@@ -23,9 +23,8 @@ function ExpenseItem(props) {
 			So when we mention it as varaible then this function is called on the button click */}
 			<button onClick={clickHandler}>Change Title</button>
 			{/* or */}
-			{/* Every event listener starts from on_ word and followed by action in captial for the first letter of the word */}
+			{/* Every event listener starts from on_ word and followed by action/eventName in captial for the first letter of the word */}
 			<button onClick={function clickHandler() { console.log("Button clicked!!!"); }}>Change Title</button>
-
 		</Card>
 	);
 }
