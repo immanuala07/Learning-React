@@ -9,6 +9,10 @@ function ExpenseItem(props) {
 		console.log('Çlicked..!');
 	};
 
+	function clickHandlerFunc() {
+		console.log('clickHandlerFunc Çlicked..!');
+	}
+
 	return ( // The below html elements should have only one root element
 		<Card className="expense-item">
 			{/* <ExpenseDate></ExpenseDate> */}
@@ -25,6 +29,9 @@ function ExpenseItem(props) {
 			{/* or */}
 			{/* Every event listener starts from on_ word and followed by action/eventName in captial for the first letter of the word */}
 			<button onClick={function clickHandler() { console.log("Button clicked!!!"); }}>Change Title</button>
+
+			<button onClick={clickHandlerFunc}>Change Title</button>
+
 		</Card>
 	);
 }
