@@ -3,7 +3,6 @@ import React from 'react';
 import './ExpenseForm.css';
 
 const ExpenseForm = () => {
-
 	// An onChange event handler returns a Synthetic Event object 
 	// which contains useful meta data such as the target input’s id, name, and current value.
 	// We can access the target input’s value inside of the changeTitle by accessing e.target.value.
