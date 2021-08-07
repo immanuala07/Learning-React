@@ -17,7 +17,7 @@ const ExpenseForm = () => {
 			<div className='new-expense__controls'>
 				<div className='new-expense__control'>
 					<label>Title</label>
-					{/* onChange react event handler uses changeTitle funtion in this example will internally have event as the parameter */}
+					{/* onChange react event handler uses changeTitle function in this example will internally have event as the parameter */}
 					<input type='text' onChange={changeTitle} />
 				</div>
 				<div className='new-expense__control'>
