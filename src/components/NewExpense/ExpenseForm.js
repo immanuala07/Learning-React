@@ -5,24 +5,45 @@ import './ExpenseForm.css';
 const ExpenseForm = () => {
 
 	// Parameter within the useState is the default value on the load
-	const [enteredTitle, updateTitle] = useState(''); // eslint-disable-line no-unused-vars
-	const [enteredAmt, updateAmt] = useState(''); // eslint-disable-line no-unused-vars
-	const [enteredDate, updateDate] = useState(''); // eslint-disable-line no-unused-vars
+	// const [enteredTitle, updateTitle] = useState('');
+	// const [enteredAmt, updateAmt] = useState('');
+	// const [enteredDate, updateDate] = useState('');
+	// (or)
+	const [userInput, setUserInput] = useState({ // eslint-disable-line no-unused-vars
+		enteredTitle: '',
+		enteredAmt: '',
+		enteredDate: ''
+	});
 
 	// An onChange event handler returns a Synthetic Event object 
 	// which contains useful meta data such as the target input’s id, name, and current value.
 	// We can access the target input’s value inside of the changeTitle by accessing e.target.value.
 	// 	Therefore, to log the name of the input field, we can log e.target.name.
 	const changeTitle = (event) => {
-		console.log(event.target.value);
+		setUserInput((prevState) => {
+			console.log({ ...prevState, enteredTitle: event.target.value });
+			// Objects cannot have same roperty in an object
+			// The below spread operator amd enteredTitle value overrides on the enteredTitle in prevState of the spread operator
+			return { ...prevState, enteredTitle: event.target.value };
+		});
 	};
 
 	const changeAmt = (event) => {
-		console.log(event.target.value);
+		setUserInput((prevState) => {
+			console.log({ ...prevState, enteredAmt: event.target.value });
+			// Objects cannot have same roperty in an object
+			// The below spread operator amd enteredAmt value overrides on the enteredAmt in prevState of the spread operator
+			return { ...prevState, enteredAmt: event.target.value };
+		});
 	};
 
 	const changeDate = (event) => {
-		console.log(event.target.value);
+		setUserInput((prevState) => {
+			console.log({ ...prevState, enteredDate: event.target.value });
+			// Objects cannot have same roperty in an object
+			// The below spread operator amd enteredDate value overrides on the enteredDate in prevState of the spread operator
+			return { ...prevState, enteredDate: event.target.value };
+		});
 	};
 
 	return (
