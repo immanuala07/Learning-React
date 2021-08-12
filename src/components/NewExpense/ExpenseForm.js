@@ -9,6 +9,7 @@ const ExpenseForm = () => {
 	// const [enteredAmt, updateAmt] = useState('');
 	// const [enteredDate, updateDate] = useState('');
 	// (or)
+	//The useState is used only when the current state is dependent on the previous state
 	const [userInput, setUserInput] = useState({ // eslint-disable-line no-unused-vars
 		enteredTitle: '',
 		enteredAmt: '',
