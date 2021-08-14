@@ -9,6 +9,9 @@ const ExpenseForm = () => {
 	const [enteredAmt, updateAmt] = useState('');
 	const [enteredDate, updateDate] = useState('');
 
+	console.log("Before");
+	console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
+
 	// An onChange event handler returns a Synthetic Event object 
 	// which contains useful meta data such as the target input’s id, name, and current value.
 	// We can access the target input’s value inside of the changeTitle by accessing e.target.value.
@@ -36,7 +39,15 @@ const ExpenseForm = () => {
 			amt: enteredAmt,
 			date: new Date(enteredDate)
 		};
+
+		// Clear the input text after clciking in submit
+		updateTitle('');
+		updateAmt('');
+		updateDate('');
+
+		console.log("After");
 		console.log(expenseData);
+		console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
 	};
 
 	return (
@@ -44,16 +55,17 @@ const ExpenseForm = () => {
 			<div className='new-expense__controls'>
 				<div className='new-expense__control'>
 					<label>Title</label>
-					{/* onChange react event handler uses changeTitle funtion in this example will internally have event as the parameter */}
-					<input type='text' onChange={changeTitle} />
+					{/* Value property is used to fetch the value during the submit clicked and empty the textbox after the button clicked - Two way binding*/}
+					{/* Two way binding - For inputs, we dont just listen to the changes but also we can pass a new value back into the input so we can reset or change input programmatically  */}
+					<input type='text' value={enteredTitle} onChange={changeTitle} />
 				</div>
 				<div className='new-expense__control'>
 					<label>Amount</label>
-					<input type='number' min='0.01' step='0.01' onChange={changeAmt} />
+					<input type='number' min='0.01' step='0.01' value={enteredAmt} onChange={changeAmt} />
 				</div>
 				<div className='new-expense__control'>
 					<label>Date</label>
-					<input type='date' min='2019-01-01' max='2022-12-31' onChange={changeDate} />
+					<input type='date' min='2019-01-01' max='2022-12-31' value={enteredDate} onChange={changeDate} />
 				</div>
 			</div>
 			<div className='new-expense__actions'>
