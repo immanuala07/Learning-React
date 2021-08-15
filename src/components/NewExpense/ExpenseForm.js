@@ -2,15 +2,15 @@ import React, { useState } from 'react';
 
 import './ExpenseForm.css';
 
-const ExpenseForm = () => {
+const ExpenseForm = (props) => {
 
 	// Parameter within the useState is the default value on the load
 	const [enteredTitle, updateTitle] = useState('');
 	const [enteredAmt, updateAmt] = useState('');
 	const [enteredDate, updateDate] = useState('');
 
-	console.log("Before");
-	console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
+	// console.log("Before");
+	// console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
 
 	// An onChange event handler returns a Synthetic Event object 
 	// which contains useful meta data such as the target input’s id, name, and current value.
@@ -40,14 +40,19 @@ const ExpenseForm = () => {
 			date: new Date(enteredDate)
 		};
 
+		// Child to Parent communication is the function defined in child component and added them to the parent component as the property assigned to function variable.
+		// that function is acessed as props.componentPropertyName and it is called when associated action is done on the component
+		// Child component is below
+		props.onSaveExpenseData(expenseData);
+
 		// Clear the input text after clciking in submit
 		updateTitle('');
 		updateAmt('');
 		updateDate('');
 
-		console.log("After");
-		console.log(expenseData);
-		console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
+		// console.log("After");
+		// console.log(expenseData);
+		// console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
 	};
 
 	return (
