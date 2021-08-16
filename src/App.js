@@ -17,7 +17,7 @@ const App = () => { // Arrow function
 
 	return (
 		<div>
-			{/* Child to Parent communication is the function defined in child component and added them to the parent component as the property assigned to function variable.
+			{/* Child to Parent communication is the function defined in parent component and added them to the child component as the property assigned to function variable.
 			that function is acessed as props.componentPropertyName and it is called when associated action is done on the component */}
 			{/* Parent component is below  and App.js is the parent component for NewExpense */}
 			<NewExpense onAddExpense={addExpenseHandler} />
