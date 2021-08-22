@@ -1,3 +1,4 @@
+// import React from "react";
 import React, { useState } from "react";
 import ExpenseDate from './ExpenseDate';
 import Card from '../UI/Card';
@@ -9,7 +10,7 @@ function ExpenseItem(props) {
 	// It is a function providedby the react library
 	// allows to define values as state where chnages to these values
 	// should reflect in the component function when being called again
-	const [title, setTitle] = useState(props.itemName);
+	const [title, setTitle] = useState(props.itemName); // eslint-disable-line no-unused-vars
 	//The above state return an arry of two elemnts
 	// title (special variable)- Output or updated value to be used further in custom component
 	// setTitle (function) - Function to be used for updating the new title whhen new title is passed as parameter
