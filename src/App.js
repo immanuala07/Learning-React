@@ -12,9 +12,9 @@ const App = () => { // Arrow function
 	];
 
 	// Load the expense data with initial year as 2022 
-	let initialExpenseData = expense.filter((item) => item.date.getFullYear().toString() == '2022');
+	// let initialExpenseData = expense.filter((item) => item.date.getFullYear().toString() == '2022');
 
-	const [expenseData, filteredExpenseData] = useState(initialExpenseData);
+	const [expenseData, filteredExpenseData] = useState(expense); // eslint-disable-line no-unused-vars
 
 	const addExpenseHandler = expense => {
 		console.log('In App.js');
@@ -22,10 +22,10 @@ const App = () => { // Arrow function
 	};
 
 	const UpdatedYear = year => {
-		// console.log('In App.js');
-		// console.log(year);
-		let expenseData = expense.filter((item) => item.date.getFullYear() == year);
-		filteredExpenseData(expenseData);
+		console.log('In App.js');
+		console.log(year);
+		// let expenseData = expense.filter((item) => item.date.getFullYear() == year);
+		// filteredExpenseData(expenseData);
 	};
 
 	return (
