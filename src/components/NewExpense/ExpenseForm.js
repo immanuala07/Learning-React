@@ -40,11 +40,17 @@ const ExpenseForm = (props) => {
 			date: new Date(enteredDate)
 		};
 
+		console.log("In ExpenseForm.js to NewExpense.js");
+		console.log(expenseData);
+
 		// Child to Parent communication is the function defined in parent component and added them to the child component as the property assigned to function variable.
 		// that function is acessed as props.componentPropertyName and it is called when associated action is done on the component
 		
+		// lifting the state up - Several components need to reflect the same changing data. We recommend lifting the shared state/data up to their closest common ancestor.
+
 		// Child component is below
 		props.onSaveExpenseData(expenseData);
+
 
 		// Clear the input text after clciking in submit
 		updateTitle('');

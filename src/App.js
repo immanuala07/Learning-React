@@ -11,7 +11,7 @@ const App = () => { // Arrow function
 	];
 
 	const addExpenseHandler = expense => {
-		console.log('In App.js');
+		console.log('Data reached in App.js');
 		console.log(expense);
 	}
 
@@ -19,6 +19,9 @@ const App = () => { // Arrow function
 		<div>
 			{/* Child to Parent communication is the function defined in parent component and added them to the child component as the property assigned to function variable.
 			that function is acessed as props.componentPropertyName and it is called when associated action is done on the component */}
+
+			{/* lifting the state up - Several components need to reflect the same changing data. We recommend lifting the shared state/data up to their closest common ancestor. */}
+
 			{/* Parent component is below  and App.js is the parent component for NewExpense */}
 			<NewExpense onAddExpense={addExpenseHandler} />
 
