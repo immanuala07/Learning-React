@@ -9,7 +9,6 @@ function Expense(props) {
 	// Setting the deafult value to dropdown filter by value as 2021
 	const [filteredYear, setFilteredYear] = useState('2021');
 
-
 	const filterStatus = year => {
 		console.log("In Expense.js");
 		console.log(year);
@@ -23,11 +22,15 @@ function Expense(props) {
 			{/* Two way binding - To define the value of state variable (useState) and change the state through event handlers as input value changes */}
 			<ExpensesFilter selected={filteredYear} onStatusChange={filterStatus} />
 
-			{/* The below html property - itemName, amount & purchaseDate to access props in ExpenseItems.js */}
-			<ExpenseItem itemName={props.items[0].name} amount={props.items[0].amt} purchaseDate={props.items[0].date} />
-			<ExpenseItem itemName={props.items[1].name} amount={props.items[1].amt} purchaseDate={props.items[1].date} />
-			<ExpenseItem itemName={props.items[2].name} amount={props.items[2].amt} purchaseDate={props.items[2].date} />
-			<ExpenseItem itemName={props.items[3].name} amount={props.items[3].amt} purchaseDate={props.items[3].date} />
+			{/* Dynamic way of loading the array of exoenses data by using map function */}
+			{/* Array => props.items[n]
+			props.items array is accessed through map function as expense object within the array with several properties like name, amt and date
+			and these dynamic data is loaded in the ExpenseItem which is the custom component */}
+			{props.items.map(expense => <ExpenseItem itemName={expense.name} amount={expense.amt} purchaseDate={expense.date} />)}
+
+			{/* Iterative way of loading an array - The below html property - itemName, amount & purchaseDate to access props in ExpenseItems.js */}
+			{/* <ExpenseItem itemName={props.items[0].name} amount={props.items[0].amt} purchaseDate={props.items[0].date} />
+			<ExpenseItem itemName={props.items[1].name} amount={props.items[1].amt} purchaseDate={props.items[1].date} /> */}
 		</Card>
 	);
 }
