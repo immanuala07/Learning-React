@@ -2,11 +2,13 @@ import React, { useState } from "react";
 import Expense from "./components/Expenses/Expense";
 import NewExpense from "./components/NewExpense/NewExpense";
 
+/* Warning: Each child in a list should have a unique "key" prop. */
+/* To fix the above error we should be adding the id property in expenses object of app.js and access those in the Expense component as the `key` prop. */
 let intialExpense = [
-	{ name: "Coffee Maker", amt: 199.00, date: new Date(2022, 5, 18) },
-	{ name: "Fridge", amt: 12250.00, date: new Date(2019, 7, 12) },
-	{ name: "Washing machine", amt: 150.00, date: new Date(2020, 5, 18) },
-	{ name: "Grocery", amt: 250.00, date: new Date(2021, 2, 28) }
+	{ id: "e1", name: "Coffee Maker", amt: 199.00, date: new Date(2022, 5, 18) },
+	{ id: "e2", name: "Fridge", amt: 12250.00, date: new Date(2019, 7, 12) },
+	{ id: "e3", name: "Washing machine", amt: 150.00, date: new Date(2020, 5, 18) },
+	{ id: "e4", name: "Grocery", amt: 250.00, date: new Date(2021, 2, 28) }
 ];
 
 const App = () => { // Arrow function

@@ -26,7 +26,11 @@ function Expense(props) {
 			{/* Array => props.items[n]
 			props.items array is accessed through map function as expense object within the array with several properties like name, amt and date
 			and these dynamic data is loaded in the ExpenseItem which is the custom component */}
-			{props.items.map(expense => <ExpenseItem itemName={expense.name} amount={expense.amt} purchaseDate={expense.date} />)}
+
+			{/* Warning: Each child in a list should have a unique "key" prop. */}
+			{/* To fix the above error we should be adding the id property in expenses object of app.js and access those in the custom component as the `key`
+			prop. */}
+			{props.items.map(expense => <ExpenseItem key={expense.id} itemName={expense.name} amount={expense.amt} purchaseDate={expense.date} />)}
 
 			{/* Iterative way of loading an array - The below html property - itemName, amount & purchaseDate to access props in ExpenseItems.js */}
 			{/* <ExpenseItem itemName={props.items[0].name} amount={props.items[0].amt} purchaseDate={props.items[0].date} />
