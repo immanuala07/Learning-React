@@ -4,6 +4,9 @@ import NewExpense from "./components/NewExpense/NewExpense";
 
 /* Warning: Each child in a list should have a unique "key" prop. */
 /* To fix the above error we should be adding the id property in expenses object of app.js and access those in the Expense component as the `key` prop. */
+// Without the unique id in every object of the object array, initially the div tag(expense tag) is added at the end and then react checks the order of the initialExpense data and compares that with the sequene of div tag props and its value.
+// If there is mismatch then every div tag (expense tag) prop value is renamed according to the initialExpense array object order and sequence.
+// So by adding id in the below object, renaming the div tag (expense tag) prop value is skipped and the new div tag is added at the desired place.
 let intialExpense = [
 	{ id: "e1", name: "Coffee Maker", amt: 199.00, date: new Date(2022, 5, 18) },
 	{ id: "e2", name: "Fridge", amt: 12250.00, date: new Date(2019, 7, 12) },

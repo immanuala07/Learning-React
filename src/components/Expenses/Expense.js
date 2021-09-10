@@ -30,6 +30,9 @@ function Expense(props) {
 			{/* Warning: Each child in a list should have a unique "key" prop. */}
 			{/* To fix the above error we should be adding the id property in expenses object of app.js and access those in the custom component as the `key`
 			prop. */}
+			{/* Without the unique id in every object of the object array, initially the div tag(expense tag) is added at the end and then react checks the order of the initialExpense data and compares that with the sequene of div tag props and its value.
+			If there is mismatch then every div tag (expense tag) prop value is renamed according to the initialExpense array object order and sequence.
+			So by adding id in the initialExpense object, renaming the div tag (expense tag) prop value is skipped and the new div tag is added at the desired place. */}
 			{props.items.map(expense => <ExpenseItem key={expense.id} itemName={expense.name} amount={expense.amt} purchaseDate={expense.date} />)}
 
 			{/* Iterative way of loading an array - The below html property - itemName, amount & purchaseDate to access props in ExpenseItems.js */}
