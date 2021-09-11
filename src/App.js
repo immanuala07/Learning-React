@@ -16,16 +16,8 @@ let intialExpense = [
 
 const App = () => { // Arrow function
 
-	// This function filters the expensedata and returns the expense data according to the selected year.
-	const filterExpenseDataByYear = ((expenseData, selectedYear) => {
-		return expenseData.filter(expense => expense.date.getFullYear() == selectedYear); // eslint-disable-line eqeqeq
-	})
-
-	// load the expense data matching 2021 year
-	let expenseDataWithIntialYear = filterExpenseDataByYear(intialExpense, 2021);
-
 	// The below array destructing initialize the value and function to set the same value.
-	const [expenses, setExpenses] = useState(expenseDataWithIntialYear);
+	const [expenses, setExpenses] = useState(intialExpense);
 
 
 	const addExpenseHandler = expense => {
@@ -44,10 +36,6 @@ const App = () => { // Arrow function
 	const UpdatedYear = year => {
 		console.log('In App.js');
 		console.log(year);
-
-		// load the expense data matching selected year
-		let expensesData = filterExpenseDataByYear(intialExpense, year);
-		setExpenses(expensesData);
 	};
 
 	return (

@@ -9,9 +9,15 @@ function Expense(props) {
 	// Setting the deafult value to dropdown filter by value as 2021
 	const [filteredYear, setFilteredYear] = useState('2021');
 
+	console.log(filteredYear);
+	// This function filters the expensedata and returns the expense data according to the selected year or the initial year.
+	let filterExpenseDataByYear = props.items.filter(expense => expense.date.getFullYear().toString() === filteredYear);
+
 	const filterStatus = year => {
 		console.log("In Expense.js");
 		console.log(year);
+		console.log("Calling setFilteredYear function with ", year);
+		// By calling the below function - Expense compoennt is reloaded
 		setFilteredYear(year);
 		props.onSelectedYear(year);
 	};
@@ -33,7 +39,8 @@ function Expense(props) {
 			{/* Without the unique id in every object of the object array, initially the div tag(expense tag) is added at the end and then react checks the order of the initialExpense data and compares that with the sequene of div tag props and its value.
 			If there is mismatch then every div tag (expense tag) prop value is renamed according to the initialExpense array object order and sequence.
 			So by adding id in the initialExpense object, renaming the div tag (expense tag) prop value is skipped and the new div tag is added at the desired place. */}
-			{props.items.map(expense => <ExpenseItem key={expense.id} itemName={expense.name} amount={expense.amt} purchaseDate={expense.date} />)}
+			{/* load the expenses component with the filtered expenses data based on the initial year and also selected year */}
+			{filterExpenseDataByYear.map(expense => <ExpenseItem key={expense.id} itemName={expense.name} amount={expense.amt} purchaseDate={expense.date} />)}
 
 			{/* Iterative way of loading an array - The below html property - itemName, amount & purchaseDate to access props in ExpenseItems.js */}
 			{/* <ExpenseItem itemName={props.items[0].name} amount={props.items[0].amt} purchaseDate={props.items[0].date} />
