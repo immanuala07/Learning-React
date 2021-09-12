@@ -3,8 +3,6 @@ import './ExpenseForm.css';
 
 const ExpenseForm = (props) => {
 
-	const [formPageStatus, udpateFormpageFlag] = useState(1); //eslint-disable-line no-unused-vars
-
 	// Parameter within the useState is the default value on the load
 	const [enteredTitle, updateTitle] = useState('');
 	const [enteredAmt, updateAmt] = useState('');
@@ -47,56 +45,34 @@ const ExpenseForm = (props) => {
 		updateTitle('');
 		updateAmt('');
 		updateDate('');
-		udpateFormpageFlag(1);
-	};
-
-	// Form add new expense handler
-	const addNewExpense = (event) => {
-		// event.preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
-		// It does not prevent further propagation of an event through the DOM.
-		event.preventDefault();
-
-		udpateFormpageFlag(0);
+		// udpateFormpageFlag(1);
 	};
 
 	const cancelHandler = (event) => {
-		// event.preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
-		// It does not prevent further propagation of an event through the DOM.
-		event.preventDefault();
-		udpateFormpageFlag(1);
+		props.updateEditingStatus(false);
 	};
 
-	if (formPageStatus === 1) {
-		return (<div>
-			<form id="addNewExpenseForm" onSubmit={addNewExpense}>
-				<div className='new-expense__actions__center'>
-					<button type='Submit'>Add New Expense</button>
-				</div>
-			</form>
-		</div >);
-	}
-
 	return (<form id="expenseForm" onSubmit={submitHandler}>
-			<div className='new-expense__controls'>
-				<div className='new-expense__control'>
-					<label>Title</label>
-					{/* Value property is used to fetch the value during the submit clicked and empty the textbox after the button clicked - Two way binding*/}
-					{/* Two way binding - For inputs, we dont just listen to the changes but also we can pass a new value back into the input so we can reset or change input programmatically  */}
-					<input type='text' value={enteredTitle} onChange={changeTitle} />
-				</div>
-				<div className='new-expense__control'>
-					<label>Amount</label>
-					<input type='number' min='0.01' step='0.01' value={enteredAmt} onChange={changeAmt} />
-				</div>
-				<div className='new-expense__control'>
-					<label>Date</label>
-					<input type='date' min='2019-01-01' max='2022-12-31' value={enteredDate} onChange={changeDate} />
-				</div>
+		<div className='new-expense__controls'>
+			<div className='new-expense__control'>
+				<label>Title</label>
+				{/* Value property is used to fetch the value during the submit clicked and empty the textbox after the button clicked - Two way binding*/}
+				{/* Two way binding - For inputs, we dont just listen to the changes but also we can pass a new value back into the input so we can reset or change input programmatically  */}
+				<input type='text' value={enteredTitle} onChange={changeTitle} />
 			</div>
-			<div className='new-expense__actions'>
-			<button type='Submit' onClick={cancelHandler}>Cancel</button>
-				<button type='Submit'>Add Expense</button>
+			<div className='new-expense__control'>
+				<label>Amount</label>
+				<input type='number' min='0.01' step='0.01' value={enteredAmt} onChange={changeAmt} />
 			</div>
+			<div className='new-expense__control'>
+				<label>Date</label>
+				<input type='date' min='2019-01-01' max='2022-12-31' value={enteredDate} onChange={changeDate} />
+			</div>
+		</div>
+		<div className='new-expense__actions'>
+			<button type='button' onClick={cancelHandler}>Cancel</button>
+			<button type='Submit'>Add Expense</button>
+		</div>
 	</form >);
 };
 

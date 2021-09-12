@@ -23,7 +23,7 @@ function Expense(props) {
 
 	return ( // The below html elements should have only one root element
 		//  Since there is <ul> in ExpensesList.js, due to the semantic reason we will providing <li> here
-		<li>
+		<li className="expenses_li">
 			<Card className="expenses">
 
 				{/* Two way binding - To define the value of state variable (useState) and change the state through event handlers as input value changes */}
