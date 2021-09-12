@@ -21,6 +21,10 @@ const NewExpense = (props) => {
 		setEditingStatus(true);
 	};
 
+	const cancelHandler = (event) => {
+		setEditingStatus(false);
+	};
+
 	return (
 		<div className='new-expense'>
 			{/* Below statement acts like a if condition. The portion before && part is the condtion and the part after && is returned. */}
@@ -30,7 +34,7 @@ const NewExpense = (props) => {
 			that function is acessed as props.componentPropertyName and it is called when associated action is done on the component */}
 			{/* Parent component is below  and NewExpense.js is the parent component for ExpenseForm */}
 			{/* Below statement acts like a if condition. The portion before && part is the condtion and the part after && is returned. */}
-			{editingStatus && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} updateEditingStatus={setEditingStatus} />}
+			{editingStatus && <ExpenseForm onSaveExpenseData={saveExpenseDataHandler} onCancelHandler={cancelHandler} />}
 		</div>
 	);
 };

@@ -48,10 +48,6 @@ const ExpenseForm = (props) => {
 		// udpateFormpageFlag(1);
 	};
 
-	const cancelHandler = (event) => {
-		props.updateEditingStatus(false);
-	};
-
 	return (<form id="expenseForm" onSubmit={submitHandler}>
 		<div className='new-expense__controls'>
 			<div className='new-expense__control'>
@@ -70,7 +66,7 @@ const ExpenseForm = (props) => {
 			</div>
 		</div>
 		<div className='new-expense__actions'>
-			<button type='button' onClick={cancelHandler}>Cancel</button>
+			<button type='button' onClick={props.onCancelHandler}>Cancel</button>
 			<button type='Submit'>Add Expense</button>
 		</div>
 	</form >);
