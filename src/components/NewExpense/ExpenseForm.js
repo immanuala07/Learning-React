@@ -1,16 +1,14 @@
 import React, { useState } from 'react';
-
 import './ExpenseForm.css';
 
 const ExpenseForm = (props) => {
+
+	const [formPageStatus, udpateFormpageFlag] = useState(1); //eslint-disable-line no-unused-vars
 
 	// Parameter within the useState is the default value on the load
 	const [enteredTitle, updateTitle] = useState('');
 	const [enteredAmt, updateAmt] = useState('');
 	const [enteredDate, updateDate] = useState('');
-
-	// console.log("Before");
-	// console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
 
 	// An onChange event handler returns a Synthetic Event object 
 	// which contains useful meta data such as the target input’s id, name, and current value.
@@ -42,7 +40,6 @@ const ExpenseForm = (props) => {
 
 		// Child to Parent communication is the function defined in parent component and added them to the child component as the property assigned to function variable.
 		// that function is acessed as props.componentPropertyName and it is called when associated action is done on the component
-		
 		// Child component is below
 		props.onSaveExpenseData(expenseData);
 
@@ -50,14 +47,36 @@ const ExpenseForm = (props) => {
 		updateTitle('');
 		updateAmt('');
 		updateDate('');
-
-		// console.log("After");
-		// console.log(expenseData);
-		// console.log(enteredTitle, " - ", enteredAmt, " - ", enteredDate);
+		udpateFormpageFlag(1);
 	};
 
-	return (
-		<form onSubmit={submitHandler}>
+	// Form add new expense handler
+	const addNewExpense = (event) => {
+		// event.preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
+		// It does not prevent further propagation of an event through the DOM.
+		event.preventDefault();
+
+		udpateFormpageFlag(0);
+	};
+
+	const cancelHandler = (event) => {
+		// event.preventDefault() method cancels the event if it is cancelable, meaning that the default action that belongs to the event will not occur.
+		// It does not prevent further propagation of an event through the DOM.
+		event.preventDefault();
+		udpateFormpageFlag(1);
+	};
+
+	if (formPageStatus === 1) {
+		return (<div>
+			<form id="addNewExpenseForm" onSubmit={addNewExpense}>
+				<div className='new-expense__actions__center'>
+					<button type='Submit'>Add New Expense</button>
+				</div>
+			</form>
+		</div >);
+	}
+
+	return (<form id="expenseForm" onSubmit={submitHandler}>
 			<div className='new-expense__controls'>
 				<div className='new-expense__control'>
 					<label>Title</label>
@@ -75,10 +94,10 @@ const ExpenseForm = (props) => {
 				</div>
 			</div>
 			<div className='new-expense__actions'>
+			<button type='Submit' onClick={cancelHandler}>Cancel</button>
 				<button type='Submit'>Add Expense</button>
 			</div>
-		</form >
-	);
+	</form >);
 };
 
 export default ExpenseForm;

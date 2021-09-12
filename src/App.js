@@ -11,7 +11,8 @@ let intialExpense = [
 	{ id: "e1", name: "Coffee Maker", amt: 199.00, date: new Date(2022, 5, 18) },
 	{ id: "e2", name: "Fridge", amt: 12250.00, date: new Date(2019, 7, 12) },
 	{ id: "e3", name: "Washing machine", amt: 150.00, date: new Date(2020, 5, 18) },
-	{ id: "e4", name: "Grocery", amt: 250.00, date: new Date(2021, 2, 28) }
+	{ id: "e4", name: "Hair dryer", amt: 375.00, date: new Date(2020, 9, 23) },
+	{ id: "e5", name: "Grocery", amt: 250.00, date: new Date(2021, 2, 28) }
 ];
 
 const App = () => { // Arrow function
