@@ -45,7 +45,6 @@ const ExpenseForm = (props) => {
 		updateTitle('');
 		updateAmt('');
 		updateDate('');
-		// udpateFormpageFlag(1);
 	};
 
 	return (<form id="expenseForm" onSubmit={submitHandler}>
