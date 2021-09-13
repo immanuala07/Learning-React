@@ -5,7 +5,7 @@ import './ChartBar.css'
 const ChartBar = (props) => {
 	let barFillHeight = '0%';
 
-	if (props.max > 0) {
+	if (props.maxValue > 0) {
 		// The below line willreturn the percentage of the bar to be filled and rounding to the nearest integer
 		// Later the barFillHeight is assigned as the dynamic style height in the chart.
 		barFillHeight = Math.round((props.value / props.maxValue) * 100) + '%';

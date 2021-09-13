@@ -32,7 +32,7 @@ const ExpenseForm = (props) => {
 
 		const expenseData = {
 			name: enteredTitle,
-			amt: enteredAmt,
+			amt: +enteredAmt, // By adding + before the enteredAmt it converts enteredAmt to number.
 			date: new Date(enteredDate)
 		};
 
