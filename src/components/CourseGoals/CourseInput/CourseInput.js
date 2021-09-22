@@ -5,7 +5,7 @@ import './CourseInput.css';
 
 const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
-  /* useState is used to set dynamic nline styles if the inputbox is empty */
+  /* useState is used to set dynamic inline styles if the inputbox is empty */
   const [isValid, setIsValid] = useState(true);
 
   const goalInputChangeHandler = event => {
@@ -27,15 +27,10 @@ const CourseInput = props => {
 
   return (
     <form onSubmit={formSubmitHandler}>
-      <div className="form-control">
-        {/* Setting dynamic nline styles if the inputbox is empty */}
-        <label style={{ color: !isValid ? 'red' : 'black' }}>Course Goal</label>
-        {/* Setting dynamic nline styles if the inputbox is empty */}
-        <input type="text" onChange={goalInputChangeHandler}
-          style={{
-            color: !isValid ? 'red' : '#ccc',
-            background: !isValid ? 'salmon' : 'transparent'
-          }} />
+      {/* Instead of adding styles dynamic to individual html tags we are adding styles to div tag so the styles are added to the tags within the div tag */}
+      <div className={`form-control ${!isValid ? 'invalid' : ''}`}>
+        <label>Course Goal</label>
+        <input type="text" onChange={goalInputChangeHandler} />
       </div>
       <Button type="submit">Add Goal</Button>
     </form>
