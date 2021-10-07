@@ -22,7 +22,9 @@ const Button = styled.button`
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.26);
 }`;
 
-// The below button is not used instead of that the above styled component is used for button
+// The below button is not used instead of that the above styled component is used for button.
+// Button type, and classname are applied inbuilt through styled component.
+
 // const Button = props => {
 // 	return (
 // 		<button type={props.type} className="button" onClick={props.onClick}>
