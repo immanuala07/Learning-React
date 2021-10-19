@@ -30,7 +30,7 @@ margin: 0.5rem 0;
 }
 `;
 
-const CourseInput = (props) => {
+const CourseInput = props => {
   const [enteredValue, setEnteredValue] = useState('');
   /* useState is used to set dynamic inline styles if the inputbox is empty */
   const [isValid, setIsValid] = useState(true);
