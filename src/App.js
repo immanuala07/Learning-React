@@ -6,7 +6,7 @@ function App() {
 	const [userList, setUserList] = useState([]);
 
 	const addUserHandler = (uName, uAge) => {
-		// setUserList(uName, uAge);
+
 		setUserList((previousUsersList) => {
 			return [...previousUsersList, { name: uName, age: uAge, id: Math.random().toString() }];
 		});
