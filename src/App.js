@@ -3,12 +3,12 @@ import AddUser from "./components/Users/AddUsers";
 import UserList from "./components/Users/UsersList";
 
 function App() {
-  return (
-    <div>
+	return (
+		<div>
 			<AddUser />
 			<UserList users={[]} />
-    </div>
-  );
+		</div>
+	);
 }
 
 export default App;
