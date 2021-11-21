@@ -5,6 +5,7 @@ import Button from './Button';
 import classes from './ErrorModal.module.css';
 
 const ErrorModal = (props) => {
+
 	return (
 		<div>
 			<div className={classes.backdrop}>
@@ -22,6 +23,7 @@ const ErrorModal = (props) => {
 			</div>
 		</div>
 	);
+
 };
 
 export default ErrorModal;
