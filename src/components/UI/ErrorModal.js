@@ -7,7 +7,7 @@ const ErrorModal = (props) => {
 	return (
 		<div>
 			{/* This div tag is adds the grayish background so that the form behind that is not accessible to edit */}
-			<div className={classes.backdrop} onClick={props.onConfirm} />
+			<div className={classes.backdrop} />
 			<Card className={classes.modal}>
 					<header className={classes.header}>
 						<h2>{props.title}</h2>
