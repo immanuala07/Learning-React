@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Card from '../UI/Card';
 import Button from '../UI/Button';
 import ErrorModal from "../UI/ErrorModal";
-import Wrapper from '../Helpers/Wrapper';
 import classes from './AddUsers.module.css';
 
 const AddUser = (props) => {
@@ -49,7 +48,8 @@ const AddUser = (props) => {
 	};
 
 	return (
-		<Wrapper>
+		// below shortcut for React Fragments
+		<>
 			{error && <ErrorModal title={error.title} message={error.message} onConfirm={errorHandler} />}
 
 			{/* className is added to the component where the css from AddUsers.module.css is passed as props to the card. */}
@@ -62,7 +62,8 @@ const AddUser = (props) => {
 					<Button type="submit">Add User</Button>
 				</form>
 			</Card>
-		</Wrapper>
+		</>
+		// above shortcut for React Fragments
 	);
 };
 
