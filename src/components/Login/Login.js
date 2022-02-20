@@ -19,7 +19,7 @@ const Login = (props) => {
 			);
 		}, 1500);
 
-		return () => {
+		return () => { // Cleanp function
 			console.log('CLEANUP');
 			clearTimeout(identifier);
 		};
