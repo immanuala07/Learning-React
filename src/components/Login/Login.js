@@ -7,7 +7,8 @@ import Button from '../UI/Button/Button';
 const emailReducer = (state, action) => {
 	console.log(state);
 	console.log(action);
-
+	// state holds the previous state/data snapshot
+	// action hold the updated or present state/data snapshot
 	if (action.type === 'USER_INPUT') {
 		return { value: action.val, isValid: action.val.includes('@') };
 	}
@@ -21,7 +22,7 @@ const passwordReducer = (state, action) => {
 	console.log(state);
 	console.log(action);
 	// state holds the previous state/data snapshot
-	// action hold the 
+	// action hold the updated or present state/data snapshot
 	if (action.type === 'USER_INPUT') {
 		return { value: action.val, isValid: action.val.trim().length > 6 };
 	}
