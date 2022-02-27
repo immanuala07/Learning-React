@@ -39,11 +39,16 @@ const Login = (props) => {
 	// Grouping password state together using useReducer function
 	const [passwordState, dispatchPassword] = useReducer(passwordReducer, { value: '', isValid: null });
 
+	// Object destructing and vaues are assigned to a variable with a different name than the object.
+	const { isValid: emailIsValid } = emailState;
+	const { isValid: passwordIsValid } = passwordState;
+
+	// AFter adding the object destructing - we dont re-run the effect whenever prompts or certain variable or value.
 	useEffect(() => {
 		const identifier = setTimeout(() => {
 			console.log("Checking form validity!");
 			setFormIsValid(
-				emailState.isValid && passwordState.isValid
+				emailIsValid && passwordIsValid
 			);
 		}, 500);
 
@@ -51,7 +56,7 @@ const Login = (props) => {
 			console.log('CLEANUP');
 			clearTimeout(identifier);
 		};
-	}, [emailState, passwordState]);
+	}, [emailIsValid, passwordIsValid]);
 
 	const emailChangeHandler = (event) => {
 		dispatchEmail({ type: 'USER_INPUT', val: event.target.value });
