@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Login from './components/Login/Login';
 import Home from './components/Home/Home';
 import MainHeader from './components/MainHeader/MainHeader';
+import AuthContext from './store/auth-context';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -30,14 +31,26 @@ function App() {
     setIsLoggedIn(false);
   };
 
-  return (
-    <React.Fragment>
-      <MainHeader isAuthenticated={isLoggedIn} onLogout={logoutHandler} />
+	return (
+		/**
+		 * When a component does not have a matching Provider in the component tree, it returns the defaultValue argument.
+		 * It is very helpful for testing components isolation (separately) without wrapping them.
+		 * 
+		 * <MyContext.Provider value={some_value}>  
+		 * 
+		 * It accepts the value prop and passes to consuming components which are descendants of this Provider.
+		 * We can connect one Provider with many consumers.
+		 * Context Providers can be nested to override values deeper within the component tree.
+		 * All consumers that are descendants of a Provider always re-render whenever the Provider's value prop is changed.
+		 * The changes are determined by comparing the old and new values using the same algorithm as Object.is algorithm.
+		 */
+		<AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
+			<MainHeader onLogout={logoutHandler} />
       <main>
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-    </React.Fragment>
+		</AuthContext.Provider>
   );
 }
 
