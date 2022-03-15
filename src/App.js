@@ -8,49 +8,55 @@ import AuthContext from './store/auth-context';
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-	/*
+  /*
 	useEffect - It is hook allows you to perform side effects in the components.
 	Examples - Fetching data, directly updating the DOM, and timers.
 	*/
-	useEffect(() => {
-		const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
-		if (storedUserLoggedInInformation) {
-			setIsLoggedIn(true);
-		}
-	}, []);
+  useEffect(() => {
+    const storedUserLoggedInInformation = localStorage.getItem('isLoggedIn');
+    if (storedUserLoggedInInformation) {
+      setIsLoggedIn(true);
+    }
+  }, []);
 
   const loginHandler = (email, password) => {
-		localStorage.setItem('isLoggedIn', '1');
+    localStorage.setItem('isLoggedIn', '1');
     // We should of course check email and password
     // But it's just a dummy/ demo anyways
     setIsLoggedIn(true);
   };
 
   const logoutHandler = () => {
-		localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('isLoggedIn');
     setIsLoggedIn(false);
   };
 
-	return (
-		/**
-		 * When a component does not have a matching Provider in the component tree, it returns the defaultValue argument.
-		 * It is very helpful for testing components isolation (separately) without wrapping them.
-		 * 
-		 * <MyContext.Provider value={some_value}>  
-		 * 
-		 * It accepts the value prop and passes to consuming components which are descendants of this Provider.
-		 * We can connect one Provider with many consumers.
-		 * Context Providers can be nested to override values deeper within the component tree.
-		 * All consumers that are descendants of a Provider always re-render whenever the Provider's value prop is changed.
-		 * The changes are determined by comparing the old and new values using the same algorithm as Object.is algorithm.
-		 */
-		<AuthContext.Provider value={{ isLoggedIn: isLoggedIn }}>
-			<MainHeader onLogout={logoutHandler} />
+  return (
+    /**
+     * When a component does not have a matching Provider in the component tree, it returns the defaultValue argument.
+     * It is very helpful for testing components isolation (separately) without wrapping them.
+     *
+     * <MyContext.Provider value={some_value}>
+     *
+     * It accepts the value prop and passes to consuming components which are descendants of this Provider.
+     * We can connect one Provider with many consumers.
+     * Context Providers can be nested to override values deeper within the component tree.
+     * All consumers that are descendants of a Provider always re-render whenever the Provider's value prop is changed.
+     * The changes are determined by comparing the old and new values using the same algorithm as Object.is algorithm.
+     */
+    <AuthContext.Provider
+      value={{
+        isLoggedIn: isLoggedIn,
+        onLogout: logoutHandler,
+      }}
+    >
+      <MainHeader onLogout={logoutHandler} />
       <main>
+        {/* Both loginHandler and logoutHandler is consumed directly in login and home compoennt so it can use props here */}
         {!isLoggedIn && <Login onLogin={loginHandler} />}
         {isLoggedIn && <Home onLogout={logoutHandler} />}
       </main>
-		</AuthContext.Provider>
+    </AuthContext.Provider>
   );
 }
 

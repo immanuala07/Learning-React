@@ -4,10 +4,9 @@ import AuthContext from '../../store/auth-context';
 import classes from './Navigation.module.css';
 
 const Navigation = (props) => {
-
   /**
-   * The useContext accepts the value provided by React.createContext and 
-   * then re-render the component whenever its value changes 
+   * The useContext accepts the value provided by React.createContext and
+   * then re-render the component whenever its value changes
    * but you can still optimize its performance by using memorization.
    */
   const ctx = useContext(AuthContext);
@@ -18,19 +17,19 @@ const Navigation = (props) => {
         {/* Consuming the  context value*/}
         {ctx.isLoggedIn && (
           <li>
-            <a href="/">Users</a>
+            <a href='/'>Users</a>
           </li>
         )}
         {/* Consuming the  context value*/}
         {ctx.isLoggedIn && (
           <li>
-            <a href="/">Admin</a>
+            <a href='/'>Admin</a>
           </li>
         )}
         {/* Consuming the  context value*/}
         {ctx.isLoggedIn && (
           <li>
-            <button onClick={props.onLogout}>Logout</button>
+            <button onClick={ctx.onLogout}>Logout</button>
           </li>
         )}
       </ul>
