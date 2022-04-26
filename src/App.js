@@ -47,10 +47,15 @@ function App() {
     <AuthContext.Provider
       value={{
         isLoggedIn: isLoggedIn,
-        onLogout: logoutHandler,
+
+        // Making the Context dynamic
+        // in dynamic context, we dont just pass data to the components but also the functions
+        onLogout: logoutHandler
       }}
     >
-      <MainHeader onLogout={logoutHandler} />
+      {/* Instead of forwarding the logoutHandler as prop to navigation component through Main Header component */}
+      {/* in dynamic context, we dont just pass data to the components but also the functions */}
+      <MainHeader />
       <main>
         {/* Both loginHandler and logoutHandler is consumed directly in login and home compoennt so it can use props here */}
         {!isLoggedIn && <Login onLogin={loginHandler} />}
