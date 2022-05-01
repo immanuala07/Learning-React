@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useReducer, useContext } from 'react';
+import React, { useState, useEffect, useReducer, useContext, useRef } from 'react';
 
 import Card from '../UI/Card/Card';
 import classes from './Login.module.css';
@@ -54,6 +54,13 @@ const Login = (props) => {
 	 */
 	const authCtx = useContext(AuthContext);
 
+	// useRef - It helps to get access the DOM node or element, and then we can interact with that
+	// that DOM node or element such as focussing the input element or accessing the input element value.
+	// It returns the ref object whose.current property initialized to the passed argument.
+	// The returned object persist for the lifetime of the component.
+	const emailInputRef = useRef();
+	const passwordInputRef = useRef();
+
 	// Object destructing and vaues are assigned to a variable with a different name than the object.
 	const { isValid: emailIsValid } = emailState;
 	const { isValid: passwordIsValid } = passwordState;
@@ -99,13 +106,26 @@ const Login = (props) => {
 
   const submitHandler = (event) => {
 	  event.preventDefault();
-	  authCtx.onLogin(emailState.value, passwordState.value);
+	  if (formIsValid) {
+		  authCtx.onLogin(emailState.value, passwordState.value);
+	  } else if (!emailIsValid) {
+		  // Focussing the email input
+		  emailInputRef.current.focus();
+	  } else {
+		  // Focussing the password input
+		  passwordInputRef.current.focus();
+	  }
   };
 
   return (
 	  <Card className={classes.login}>
 		  <form onSubmit={submitHandler}>
 			  <Input
+				  // useRef - It helps to get access the DOM node or element, and then we can interact with that
+				  // that DOM node or element such as focussing the input element or accessing the input element value.
+				  // It returns the ref object whose.current property initialized to the passed argument.
+				  // The returned object persist for the lifetime of the component.
+				  ref={emailInputRef}
 				  id="email"
 				  label="E-Mail"
 				  type="email"
@@ -115,6 +135,11 @@ const Login = (props) => {
 				  onBlur={validateEmailHandler}
 			  />
 			  <Input
+				  // useRef - It helps to get access the DOM node or element, and then we can interact with that
+				  // that DOM node or element such as focussing the input element or accessing the input element value.
+				  // It returns the ref object whose.current property initialized to the passed argument.
+				  // The returned object persist for the lifetime of the component.
+				  ref={passwordInputRef}
 				  id="password"
 				  label="Password"
 				  type="password"
@@ -124,7 +149,7 @@ const Login = (props) => {
 				  onBlur={validatePasswordHandler}
 			  />
 			  <div className={classes.actions}>
-				  <Button type='submit' className={classes.btn} disabled={!formIsValid}>
+				  <Button type='submit' className={classes.btn} >
 					  Login
 				  </Button>
 			  </div>
