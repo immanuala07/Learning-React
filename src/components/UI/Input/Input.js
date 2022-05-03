@@ -29,7 +29,9 @@ const Input = React.forwardRef((props, ref) => {
     // It allows you to replace the native instances of the ref object with the user - defined ones.
     useImperativeHandle(ref, () => {
         return {
-            focus: activate
+            activate: activate
+            // or
+            // focus: activate
         };
     });
 

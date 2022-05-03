@@ -110,10 +110,16 @@ const Login = (props) => {
 		  authCtx.onLogin(emailState.value, passwordState.value);
 	  } else if (!emailIsValid) {
 		  // Focussing the email input
-		  emailInputRef.current.focus();
+		  // Calling the function property within the useImperativeHandle in Input component
+		  emailInputRef.current.activate();
+		  // or
+		  // emailInputRef.current.focus();
 	  } else {
 		  // Focussing the password input
-		  passwordInputRef.current.focus();
+		  // Calling the function property within the useImperativeHandle in Input component
+		  passwordInputRef.current.activate();
+		  // or
+		  // emailInputRef.current.focus();
 	  }
   };
 
