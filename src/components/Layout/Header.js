@@ -1,5 +1,7 @@
 import React, { Fragment } from "react";
 
+import HeaderCartButton from "./HeaderCartButton";
+
 import classes from './Header.module.css';
 
 import mealsImage from '../../assets/meals.jpg';
@@ -9,7 +11,7 @@ const Header = (props) => {
         <Fragment>
             <header className={classes.header}>
                 <h1>ReactMeals</h1>
-                <button>Cart</button>
+                <HeaderCartButton />
             </header>
             {/* Since below we have '-' for the css so we not using '.'(dot) operator so we are using '[]' operation to access the main-image in classes */}
             <div className={classes['main-image']}>
