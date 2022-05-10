@@ -11,7 +11,7 @@ const Header = (props) => {
         <Fragment>
             <header className={classes.header}>
                 <h1>ReactMeals</h1>
-                <HeaderCartButton />
+                <HeaderCartButton onClick={props.onShowCart} />
             </header>
             {/* Since below we have '-' for the css so we not using '.'(dot) operator so we are using '[]' operation to access the main-image in classes */}
             <div className={classes['main-image']}>
