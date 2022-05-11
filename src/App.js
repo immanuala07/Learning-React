@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 // Its ok to omit the above React import in modern React projects
 // you can always add it as well though.
 // We can always import React from React since it's required 
@@ -7,6 +7,7 @@ import React, { Fragment, useState } from "react";
 import Header from "./components/Layout/Header";
 import Meals from "./components/Meals/Meals";
 import Cart from './components/Cart/Cart';
+import CartProvider from './store/CartProvider';
 
 function App() {
   const [cartIsShown, setCartIsShown] = useState(false);
@@ -20,13 +21,13 @@ function App() {
   };
 
   return (
-    <Fragment>
+    <CartProvider>
       {cartIsShown && <Cart onClose={hideCartHandler} />}
       <Header onShowCart={showCartHandler} />
       <main>
         <Meals />
       </main>
-    </Fragment>
+    </CartProvider>
   );
 }
 
