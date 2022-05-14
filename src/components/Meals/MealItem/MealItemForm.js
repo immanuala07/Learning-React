@@ -1,10 +1,27 @@
+import {useRef, useState} from 'react';
 import Input from '../../UI/Input';
 import classes from './MealItemForm.module.css';
 
 const MealItemForm = props => {
-    return <form className={classes.form}>
+    const [amountIsValid, setAmountIsValid] = useState(true);
+    const amountInputRef = useRef();
 
+    const submitHandler = (event) => {
+        event.preventDefault();
 
+        const enteredAmount = amountInputRef.current.value;
+        // Converts to number using unary operator
+        const enteredAmountNumber = +enteredAmount;
+
+        if (enteredAmount.trim().length === 0 || enteredAmountNumber < 1 || enteredAmountNumber > 5) {
+            setAmountIsValid(false);
+            return;
+        }
+
+        props.onAddToCart(enteredAmountNumber);
+    };
+
+    return <form className={classes.form} onSubmit={submitHandler}>
         {/* Passing the default html tag element properties as 'input' props to this react component */}
         {/* Since we passing an object to the input component so we are using double flower brackets'{{}}' */}
 
@@ -55,15 +72,20 @@ const MealItemForm = props => {
             price={meal.price}
         />
         */}
-        <Input label="amount" input={{
-            id: 'amount_' + props.id, // Fixed Form Input IDs
-            type: 'number',
-            min: '1',
-            max: '5',
-            step: '1',
-            defaultValue: '1'
-        }} />
+        <Input
+            ref={amountInputRef}
+            label="amount"
+            input={{
+                id: 'amount_' + props.id, // Fixed Form Input IDs
+                type: 'number',
+                min: '1',
+                max: '5',
+                step: '1',
+                defaultValue: '1'
+            }}
+        />
         <button>+ Add</button>
+        {!amountIsValid && <p>Please enter a valid amount (1-5).</p>}
     </form>;
 };
 

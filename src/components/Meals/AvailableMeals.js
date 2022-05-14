@@ -31,9 +31,14 @@ const DUMMY_MEALS = [
 ];
 
 const AvailableMeals = () => {
+    // It creates a new array from calling a function for every array element.
+    // It calls a function once for each element in an array.
+    // It does not execute the function for empty elements. 
+    // It does not change the original array.
     const mealsList = DUMMY_MEALS.map((meal) => {
         return <MealItem
             key={meal.id}
+            id={meal.id}
             name={meal.name}
             description={meal.description}
             price={meal.price}
