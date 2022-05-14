@@ -8,10 +8,31 @@ const defaultCartState = {
 
 const cartReducer = ((state, action) => {
     if (action.type === 'ADD') {
-        // The concat() method is used to merge two or more arrays. 
-        // This method does not change the existing arrays, but instead returns a new array.
-        const updatedItems = state.items.concat(action.item);
         const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+
+        const existingCartItemIndex = state.items.findIndex(
+            item => item.id === action.item.id
+        );
+
+        const existingCartItem = state.items[existingCartItemIndex];
+        let updatedItems;
+
+        if (existingCartItem) {
+            const updatedItem = {
+                ...existingCartItem,
+                amount: existingCartItem.amount + action.item.amount
+            };
+
+            // Adds the older items to const varable
+            updatedItems = [...state.items];
+
+            // Updates the existing items with selected order which already present in cart
+            updatedItems[existingCartItemIndex] = updatedItem;
+        } else {
+            // The concat() method is used to merge two or more arrays.
+            // This method does not change the existing arrays, but instead returns a new array.
+            updatedItems = state.items.concat(action.item);
+        }
 
         return {
             items: updatedItems,
