@@ -40,6 +40,39 @@ const cartReducer = ((state, action) => {
         };
     }
 
+    if (action.type === 'REMOVE') {
+        // Check whether any item exist in cart with a particular item id and 
+        // returns index(position) of the first element that passes a test(in array) and 
+        // returns - 1 if no match is found.
+        const existingCartItemIndex = state.items.findIndex(
+            (item) => item.id === action.id
+        );
+
+        const existingItem = state.items[existingCartItemIndex];
+        const updatedTotalAmount = state.totalAmount - existingItem.price;
+
+        let updatedItems;
+        if (existingItem.amount === 1) {
+            // The filter() method creates a new array filled with elements that pass a test provided by a function and
+            // does not change the original array.
+
+            // Excluding the items which matches id in the array.
+            updatedItems = state.items.filter(item => item.id !== action.id);
+        } else {
+            const updatedItem = {...existingItem, amount: existingItem.amount - 1};
+
+            // Adds the older items to const varable
+            updatedItems = [...state.items];
+
+            // Updates the existing items with selected order which already present in cart
+            updatedItems[existingCartItemIndex] = updatedItem;
+        }
+
+        return {
+            items: updatedItems,
+            totalAmount: updatedTotalAmount
+        };
+    }
     return defaultCartState;
 });
 
