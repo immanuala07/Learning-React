@@ -17,4 +17,6 @@ const Button = (props) => {
   );
 };
 
-export default Button;
+// memo will cause React to skip rendering a component if its props have not changed.
+// This can improve performance.
+export default React.memo(Button);

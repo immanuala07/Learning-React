@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useCallback} from 'react';
 
 import Button from './components/UI/Button/Button';
 import DemoOutput from './components/Demo/DemoOutput';
@@ -10,9 +10,16 @@ function App() {
 
   console.log('APP RUNNING');
 
-  const toggleParagraphHandler = () => {
+  // The React useCallback Hook returns a memoized callback function.
+
+  // The useCallback hook is used when you have a component in which the child is rerendering again and again without need.
+
+  // Pass an inline callback and an array of dependencies.
+  // useCallback will return a memoized version of the callback that only changes if one of the dependencies has changed.This is useful when passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders.
+  const toggleParagraphHandler = useCallback(() => {
     setShowParagraph((prevShowParagraph) => !prevShowParagraph);
-  };
+    // We cannot use prevShowParagraph as dependency in the useCallback since its scope is within this function.
+  }, []);
 
   return (
     <div className="app">
