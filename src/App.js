@@ -7,6 +7,7 @@ import './App.css';
 
 function App() {
   const [showParagraph, setShowParagraph] = useState(false);
+  const [allowToggle, setAllowToggle] = useState(false);
 
   console.log('APP RUNNING');
 
@@ -17,15 +18,21 @@ function App() {
   // Pass an inline callback and an array of dependencies.
   // useCallback will return a memoized version of the callback that only changes if one of the dependencies has changed.This is useful when passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders.
   const toggleParagraphHandler = useCallback(() => {
-    setShowParagraph((prevShowParagraph) => !prevShowParagraph);
+    if (allowToggle) {
+      setShowParagraph((prevShowParagraph) => !prevShowParagraph);
     // We cannot use prevShowParagraph as dependency in the useCallback since its scope is within this function.
-  }, []);
+    }
+  }, [allowToggle]);
+
+  const allowToggleHandler = () => {
+    setAllowToggle(true);
+  }
 
   return (
     <div className="app">
       <h1>Hi there!</h1>
-      <DemoOutput show={false} />
-      {/* {showParagraph && <p>This is new!</p>} */}
+      <DemoOutput show={showParagraph} />
+      <Button onClick={allowToggleHandler}>Allow Toggling</Button>
       <Button onClick={toggleParagraphHandler}>Toggle Paragraph!</Button>
     </div>
   );
