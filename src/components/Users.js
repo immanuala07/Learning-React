@@ -21,6 +21,11 @@ class Users extends Component {
     };
   }
 
+  // componentWillUnmount method is called when the component is about to be removed from the DOM.
+  componentWillUnmount() {
+    console.log('User will unmount!');
+  }
+
   toggleUsersHandler() {
     // To set the state value we cannot use th below statement
     // this.state.showUsers = false;
