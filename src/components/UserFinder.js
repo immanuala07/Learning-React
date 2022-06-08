@@ -1,20 +1,17 @@
-import { Component, Fragment, useState, useEffect } from 'react';
+import { Component, Fragment } from 'react';
 
 import Users from './Users';
+import UsersContext from '../store/users-context';
 
 import classes from './UserFinder.module.css';
 
-const DUMMY_USERS = [
-  { id: 'u1', name: 'Max' },
-  { id: 'u2', name: 'Manuel' },
-  { id: 'u3', name: 'Julie' },
-];
-
 class UserFinder extends Component {
+  static contextType = UsersContext;
+
   constructor() {
     super();
     this.state = {
-      filteredUsers: DUMMY_USERS,
+      filteredUsers: [],
       searchTerm: '',
     };
   }
@@ -23,7 +20,7 @@ class UserFinder extends Component {
   // This is where you run statements that requires that the component is already placed in the DOM.
   componentDidMount() {
     // Send http request...
-    this.setState({ filteredUsers: DUMMY_USERS });
+    this.setState({ filteredUsers: this.context.users });
   }
 
   // componentDidUpdate() method is called after the component is updated in the DOM.
@@ -32,9 +29,9 @@ class UserFinder extends Component {
     // so we have added the IF condtion to check whether the previous state and the present are different or not.
     if (prevState.searchTerm !== this.state.searchTerm) {
       this.setState({
-        filteredUsers: DUMMY_USERS.filter((user) => {
-          user.name.includes(this.state.searchTerm);
-        }),
+        filteredUsers: this.context.users.filter((user) =>
+          user.name.includes(this.state.searchTerm)
+        ),
       });
     }
   }

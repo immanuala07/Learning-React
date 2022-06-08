@@ -1,10 +1,9 @@
-import {Component} from 'react';
+import { Component } from 'react';
 import classes from './User.module.css';
 
 //--------- Class based components ---------
 // JS class is not an object and it is a template for JS objects.
 class User extends Component {
-
   /*
   The constructor method is a special method:
   It has to have the exact name "constructor"
@@ -14,6 +13,11 @@ class User extends Component {
   If you do not define a constructor method, JavaScript will add an empty constructor method.
   constructor() {}
   */
+
+  // componentWillUnmount method is called when the component is about to be removed from the DOM.
+  componentWillUnmount() {
+    console.log('User will unmount!');
+  }
 
   // React renders HTML to the web page by using a function called render().
   // Render function is to display the specified HTML code inside the specified HTML element.
