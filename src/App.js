@@ -5,8 +5,10 @@ import './App.css';
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   async function fetchMoviesHandler() {
+    setIsLoading(true);
     // Fetch() method that allows you to fetch data from all sorts of different places and work with the data fetched.
     // It allows you to make an HTTP request, i.e., either a GET request (for getting data) or POST request (for posting data).
     const response = await fetch('https://swapi.dev/api/films');
@@ -19,8 +21,8 @@ function App() {
         rreleaseDate: movieData.release_date
       };
     });
-    console.log('Data is retrieved');
     setMovies(transformedMovies);
+    setIsLoading(false);
   };
 
   return (
@@ -29,7 +31,9 @@ function App() {
         <button onClick={fetchMoviesHandler}>Fetch Movies</button>
       </section>
       <section>
-        <MoviesList movies={movies} />
+        {!isLoading && movies.length > 0 && <MoviesList movies={movies} />}
+        {!isLoading && movies.length === 0 && <p>Found no movies.</p>}
+        {isLoading && <p>Loading...</p>}
       </section>
     </React.Fragment>
   );
