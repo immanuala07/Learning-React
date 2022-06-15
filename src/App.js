@@ -17,7 +17,7 @@ function App() {
           id: movieData.episode_id,
           title: movieData.title,
           openingText: movieData.opening_crawl,
-          rreleaseDate: movieData.release_date
+          releaseDate: movieData.release_date
         };
       });
       console.log('Data is retrieved');
