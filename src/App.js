@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 
 import MoviesList from './components/MoviesList';
 import './App.css';
@@ -8,7 +8,10 @@ function App() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  async function fetchMoviesHandler() {
+  // The React useCallback Hook returns a memoized callback function.
+  // useCallback will return a memoized version of the callback that only changes if one of the dependencies has changed.This is useful when passing callbacks to optimized child components
+  // that rely on reference equality to prevent unnecessary renders.
+  const fetchMoviesHandler = useCallback(async () => {
     setIsLoading(true);
     setError(null);
     try {
@@ -32,7 +35,17 @@ function App() {
       setError(error.message);
     }
     setIsLoading(false);
-  };
+  }, []);
+
+  /*
+  useEffect - It is hook allows you to perform side effects in the components.
+  Examples - Fetching data, directly updating the DOM, and timers.
+  */
+  useEffect(() => {
+    // After adding the below function within the useCallback hook above so that the below function remains unchanged till the dependencies provided in useCallback and
+    // removes unwanted infinite calls of the below function.
+    fetchMoviesHandler();
+  }, [fetchMoviesHandler]);
 
   let content = <p>Found no movies.</p>;
 
