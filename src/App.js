@@ -7,26 +7,28 @@ import useHttp from './components/hooks/use-http';
 function App() {
   const [tasks, setTasks] = useState([]);
 
-  // tranformTasks() function is used to convert the object to array which is returned from the REST API(firebase).
-  const transformTasks = (tasksObj) => {
-    const loadedTasks = [];
-
-    for (const taskKey in tasksObj) {
-      loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
-    }
-
-    setTasks(loadedTasks);
-  };
-
   // Object destructing is done to assign the values to individual variable
   // sendRequest function in app.js is a property in object which is used as fetchTask function in this file.
-  const { isLoading, error, sendRequest: fetchTasks } = useHttp(
-    { url: 'https://react-http-1e116-default-rtdb.firebaseio.com/tasks.json' },
-    transformTasks
-  );
+  // By removing the parameters to the custom hook function ( useHttp() ) we can avoid addding dependencies to the useEffect hook
+  const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
   useEffect(() => {
-    fetchTasks();
+    // tranformTasks() function is used to convert the object to array which is returned from the REST API(firebase).
+    const transformTasks = (tasksObj) => {
+      const loadedTasks = [];
+
+      for (const taskKey in tasksObj) {
+        loadedTasks.push({ id: taskKey, text: tasksObj[taskKey].text });
+      }
+
+      setTasks(loadedTasks);
+    };
+
+    // By adding the parameters to the fetchTasks() function we can avoid addding dependencies to the useEffect hook
+    fetchTasks(
+      { url: 'https://react-http-1e116-default-rtdb.firebaseio.com/tasks.json' },
+      transformTasks
+    );
   }, []);
 
   const taskAddHandler = (task) => {
