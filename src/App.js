@@ -12,6 +12,8 @@ function App() {
   // By removing the parameters to the custom hook function ( useHttp() ) we can avoid addding dependencies to the useEffect hook
   const { isLoading, error, sendRequest: fetchTasks } = useHttp();
 
+  // The useEffect Hook allows you to perform side effects in your components.
+  // Some examples of side effects are: fetching data, directly updating the DOM, and timers.
   useEffect(() => {
     // tranformTasks() function is used to convert the object to array which is returned from the REST API(firebase).
     const transformTasks = (tasksObj) => {
@@ -28,7 +30,7 @@ function App() {
     fetchTasks(
       { url: 'https://react-http-1e116-default-rtdb.firebaseio.com/tasks.json' },
       transformTasks
-    );
+    ); // eslint-disable-next-line
   }, []);
 
   const taskAddHandler = (task) => {
