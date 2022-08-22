@@ -2,6 +2,10 @@ import React from 'react'; // eslint-disable-line no-unused-vars
 import styled from 'styled-components';
 
 // Adding the button styles using styled component package  
+
+// This Button variable here is now a React component that you can use like any other React component.
+// This unusual backtick syntax is a new JavaScript feature called a tagged template literal.
+// Button type, and classname are applied inbuilt through styled component.
 const Button = styled.button`
   font: inherit;
   padding: 0.5rem 1.5rem;
