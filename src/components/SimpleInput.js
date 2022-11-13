@@ -27,6 +27,16 @@ const SimpleInput = ( props ) => {
     setEnteredName( event.target.value );
   };
 
+  const nameInputBlurHandler = ( ( event ) => {
+    setEnteredNameTouched( true );
+
+    if ( enteredName.trim() === '' )
+    {
+      setEnteredNameIsValid( false );
+      return;
+    }
+  } );
+
   const formSubmissionHandler = ( event ) => {
     event.preventDefault();
 
@@ -62,6 +72,9 @@ const SimpleInput = ( props ) => {
           id='name'
           // Use the value for every keystroke on name textfield
           onChange={nameInputChangeHandler}
+
+          // The onblur event occurs when an object loses focus.
+          onBlur={nameInputBlurHandler}
 
           ref={nameInputRef}
 
