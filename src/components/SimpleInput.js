@@ -9,9 +9,18 @@ const SimpleInput = ( props ) => {
   const enteredNameIsValid = enteredName.trim() !== '';
   const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
+
+  const [ enteredEmail, setEnteredEmail ] = useState( '' );
+  const [ enteredEmailTouched, setEnteredEmailTouched ] = useState( false );
+
+  // const emailRegex = /\S+@\S+\.\S+/;
+  // const enteredEmailIsValid = emailRegex.test( enteredEmail );
+  const enteredEmailIsValid = enteredEmail.includes( '@' );
+  const emailInputIsInvalid = !enteredEmailIsValid && enteredEmailTouched;
+
   let formIsValid = false;
 
-  if ( enteredNameIsValid )
+  if ( enteredNameIsValid && enteredEmailIsValid )
   {
     formIsValid = true;
   }
@@ -24,23 +33,35 @@ const SimpleInput = ( props ) => {
     setEnteredNameTouched( true );
   } );
 
+  const emailInputChangeHandler = ( event ) => {
+    setEnteredEmail( event.target.value );
+  };
+
+  const emailInputBlurHandler = ( ( event ) => {
+    setEnteredEmailTouched( true );
+  } );
+
   const formSubmissionHandler = ( event ) => {
     event.preventDefault();
 
     setEnteredNameTouched( true );
 
-    if ( !enteredNameIsValid )
+    if ( !enteredNameIsValid && !enteredEmailIsValid )
     {
       return;
     }
     console.log( enteredName );
+    console.log( enteredEmail );
 
     // Two way binding
     setEnteredName( '' );
+    setEnteredEmail( '' );
     setEnteredNameTouched( false );
+    setEnteredEmailTouched( false );
   };
 
   const nameInputClasses = nameInputIsInvalid ? 'form-control invalid' : 'form-control';
+  const emailInputClasses = emailInputIsInvalid ? 'form-control invalid' : 'form-control';
 
   return (
     <form onSubmit={formSubmissionHandler}>
@@ -60,6 +81,24 @@ const SimpleInput = ( props ) => {
         />
         {nameInputIsInvalid && <p className='error-text'>Name must not be empty.</p>}
       </div>
+
+      <div className={emailInputClasses}>
+        <label htmlFor='email'>Your Email</label>
+        <input
+          type='email'
+          id='email'
+          // Use the value for every keystroke on name textfield
+          onChange={emailInputChangeHandler}
+
+          // The onblur event occurs when an object loses focus.
+          onBlur={emailInputBlurHandler}
+
+          // Two way binding
+          value={enteredEmail}
+        />
+        {emailInputIsInvalid && <p className='error-text'>Please enter a valid email.</p>}
+      </div>
+
       <div className='form-actions'>
         <button disabled={!formIsValid}>Submit</button>
       </div>
