@@ -1,27 +1,13 @@
-import {useEffect, useRef, useState} from 'react';
+import {useState} from 'react';
 
 const SimpleInput = ( props ) => {
-  // Use the value only once after the form is submitted
-  const nameInputRef = useRef();
 
   // Use the value for every keystroke on name textfield
   const [ enteredName, setEnteredName ] = useState( '' );
-
-  // We are making the inputs valid as true on load but this is not the right logic to use.
-  // To avoid this making a tweak of inputs valid we are adding a new state
-  // const [ enteredNameIsValid, setEnteredNameIsValid ] = useState( true );
-
-  const [ enteredNameIsValid, setEnteredNameIsValid ] = useState( false );
   const [ enteredNameTouched, setEnteredNameTouched ] = useState( false );
 
-  // To test whether is there any valid input onload of the page
-  useEffect( () => {
-    if ( enteredNameIsValid )
-    {
-      console.log( "Name Input is valid!" );
-    }
-  }, [ enteredNameIsValid ] )
-
+  const enteredNameIsValid = enteredName.trim() !== '';
+  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
 
   const nameInputChangeHandler = ( event ) => {
     setEnteredName( event.target.value );
@@ -29,12 +15,6 @@ const SimpleInput = ( props ) => {
 
   const nameInputBlurHandler = ( ( event ) => {
     setEnteredNameTouched( true );
-
-    if ( enteredName.trim() === '' )
-    {
-      setEnteredNameIsValid( false );
-      return;
-    }
   } );
 
   const formSubmissionHandler = ( event ) => {
@@ -42,25 +22,17 @@ const SimpleInput = ( props ) => {
 
     setEnteredNameTouched( true );
 
-    if ( enteredName.trim() === '' )
+    if ( !enteredNameIsValid )
     {
-      setEnteredNameIsValid( false );
       return;
     }
-
-    setEnteredNameIsValid( true );
     console.log( enteredName );
-
-    const enteredValue = nameInputRef.current.value;
-    console.log( enteredValue );
-
-    // nameInputRef.current.value = '';  => NOT IDEAL, DONT MANIPULATE THE DOM
 
     // Two way binding
     setEnteredName( '' );
+    setEnteredNameTouched( false );
   };
 
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
   const nameInputClasses = nameInputIsInvalid ? 'form-control invalid' : 'form-control';
 
   return (
@@ -75,8 +47,6 @@ const SimpleInput = ( props ) => {
 
           // The onblur event occurs when an object loses focus.
           onBlur={nameInputBlurHandler}
-
-          ref={nameInputRef}
 
           // Two way binding
           value={enteredName}
