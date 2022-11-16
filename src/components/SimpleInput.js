@@ -1,15 +1,18 @@
-import {useState} from 'react';
+import { useState } from 'react';
+import useInput from '../hooks/use-input';
 
-const SimpleInput = ( props ) => {
+const SimpleInput = (props) => {
+
+  const {
+    value: enteredName,
+    isValid: enteredNameIsValid,
+    hasError: nameInputHasError,
+    valueChangeHandler: nameChangeHandler,
+    inputBlurHandler: nameBlurHandler,
+    reset: resetNameInput
+  } = useInput((value) => value.trim() !== '');
 
   // Use the value for every keystroke on name textfield
-  const [ enteredName, setEnteredName ] = useState( '' );
-  const [ enteredNameTouched, setEnteredNameTouched ] = useState( false );
-
-  const enteredNameIsValid = enteredName.trim() !== '';
-  const nameInputIsInvalid = !enteredNameIsValid && enteredNameTouched;
-
-
   const [ enteredEmail, setEnteredEmail ] = useState( '' );
   const [ enteredEmailTouched, setEnteredEmailTouched ] = useState( false );
 
@@ -25,14 +28,6 @@ const SimpleInput = ( props ) => {
     formIsValid = true;
   }
 
-  const nameInputChangeHandler = ( event ) => {
-    setEnteredName( event.target.value );
-  };
-
-  const nameInputBlurHandler = ( ( event ) => {
-    setEnteredNameTouched( true );
-  } );
-
   const emailInputChangeHandler = ( event ) => {
     setEnteredEmail( event.target.value );
   };
@@ -44,8 +39,6 @@ const SimpleInput = ( props ) => {
   const formSubmissionHandler = ( event ) => {
     event.preventDefault();
 
-    setEnteredNameTouched( true );
-
     if ( !enteredNameIsValid && !enteredEmailIsValid )
     {
       return;
@@ -53,14 +46,13 @@ const SimpleInput = ( props ) => {
     console.log( enteredName );
     console.log( enteredEmail );
 
-    // Two way binding
-    setEnteredName( '' );
-    setEnteredEmail( '' );
-    setEnteredNameTouched( false );
+    // Two way  binding
+    resetNameInput();
+    setEnteredEmail('');
     setEnteredEmailTouched( false );
   };
 
-  const nameInputClasses = nameInputIsInvalid ? 'form-control invalid' : 'form-control';
+  const nameInputClasses = enteredNameIsValid ? 'form-control invalid' : 'form-control';
   const emailInputClasses = emailInputIsInvalid ? 'form-control invalid' : 'form-control';
 
   return (
@@ -71,15 +63,15 @@ const SimpleInput = ( props ) => {
           type='text'
           id='name'
           // Use the value for every keystroke on name textfield
-          onChange={nameInputChangeHandler}
+          onChange={nameChangeHandler}
 
-          // The onblur event occurs when an object loses focus.
-          onBlur={nameInputBlurHandler}
+           // The onblur event occurs when an object loses focus.
+          onBlur={nameBlurHandler}
 
           // Two way binding
           value={enteredName}
         />
-        {nameInputIsInvalid && <p className='error-text'>Name must not be empty.</p>}
+        {nameInputHasError && <p className='error-text'>Name must not be empty.</p>}
       </div>
 
       <div className={emailInputClasses}>
