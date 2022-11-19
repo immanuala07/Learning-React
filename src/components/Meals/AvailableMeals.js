@@ -6,6 +6,7 @@ import { useEffect, useState } from 'react';
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [httpError, setHttpError] = useState();
 
   // If the useEffect dependency is [],
   // useEffect function will only run when the component was first loaded.
@@ -24,6 +25,11 @@ const AvailableMeals = () => {
       const response = await fetch(
         'https://react-http-1e116-default-rtdb.firebaseio.com/meals.json'
       );
+
+      if (!response.ok) {
+        throw new Error('Something went wrong!');
+      }
+
       const responseData = await response.json();
 
       const loadedMeals = [];
@@ -43,13 +49,25 @@ const AvailableMeals = () => {
     };
 
     // Calling fetchMeals() async function
-    fetchMeals();
+    fetchMeals().catch((error) => {
+      setIsLoading(false);
+      console.log(error.message);
+      setHttpError(error.message);
+    });
   }, []);
 
   if (isLoading) {
     return (
       <section className={classes.MealsLoading}>
         <p>Loading...</p>
+      </section>
+    );
+  }
+
+  if (httpError) {
+    return (
+      <section className={classes.MealsError}>
+        <p>{httpError}</p>
       </section>
     );
   }
