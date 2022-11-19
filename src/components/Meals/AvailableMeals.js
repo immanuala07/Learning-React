@@ -5,8 +5,9 @@ import { useEffect, useState } from 'react';
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
-  // If the useEffect dependency is [], 
+  // If the useEffect dependency is [],
   // useEffect function will only run when the component was first loaded.
   useEffect(() => {
     // The function you pass to useEffect should not return a promise.
@@ -19,8 +20,10 @@ const AvailableMeals = () => {
     // and use async here and put your code, this line of code,
     // into this nested inner function, and then just execute fetchMeals as part of useEffect.
     // By doing it that way, this function is still executed, and you can still use async await,
-    const fetchMeals = (async () => {
-      const response = await fetch("https://react-http-1e116-default-rtdb.firebaseio.com/meals.json");
+    const fetchMeals = async () => {
+      const response = await fetch(
+        'https://react-http-1e116-default-rtdb.firebaseio.com/meals.json'
+      );
       const responseData = await response.json();
 
       const loadedMeals = [];
@@ -33,14 +36,23 @@ const AvailableMeals = () => {
           price: responseData[key].price
         });
       }
-      // Initially, the page is loaded without the data 
+      // Initially, the page is loaded without the data
       // So, we are using useState setter function to reload the component with data.
       setMeals(loadedMeals);
-    });
+      setIsLoading(false);
+    };
 
     // Calling fetchMeals() async function
     fetchMeals();
   }, []);
+
+  if (isLoading) {
+    return (
+      <section className={classes.MealsLoading}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map((meal) => (
     <MealItem
