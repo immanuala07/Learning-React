@@ -1,6 +1,5 @@
 import classes from './Counter.module.css';
 
-/*
 import { useSelector, useDispatch } from 'react-redux';
 
 const Counter = () => {
@@ -32,7 +31,7 @@ const Counter = () => {
   Each call to useSelector() creates an individual subscription to the Redux store.
   Because of the React update batching behavior used in React Redux v7,
   a dispatched action that causes multiple useSelector()s in the same component to return new values should only result in a single re-render.
-
+  */
   const counter = useSelector(state => state.counter);
 
   const toggleCounterHandler = () => { };
@@ -51,8 +50,8 @@ const Counter = () => {
 };
 
 export default Counter;
-*/
 
+/*
 import { Component } from 'react';
 import { connect } from 'react-redux';
 
@@ -120,4 +119,5 @@ The returns of mapStateToProps and mapDispatchToProps are referred to internally
 They will be supplied to mergeProps, if defined, as the first and the second argument, where the third argument will be ownProps.
 The combined result, commonly referred to as mergedProps, will then be supplied to your connected component.
 */
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+
+// export default connect(mapStateToProps, mapDispatchToProps)(Counter);
