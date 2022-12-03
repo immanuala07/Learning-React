@@ -96,6 +96,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
   return {
     // dispatch is a function which is in variable form.
+    // dispatch function takes action object as parameter.
     increment: () => dispatch({ type: 'increment' }),
     decrement: () => dispatch({ type: 'decrement' })
   };
