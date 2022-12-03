@@ -18,6 +18,13 @@ const counterReducer = (state = { counter: 0 }, action) => {
     }
   }
 
+  if (action.type === 'increaseBy5') {
+    return {
+      // Added payload to Action with action.amount (to fetch latest amount value) for generic approach
+      counter: state.counter + action.amount
+    }
+  }
+
   if (action.type === 'decrement') {
     return {
       counter: state.counter - 1
