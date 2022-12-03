@@ -1,6 +1,11 @@
 // In an application there can be only one central data store and there cannot be more than one central data store.
 import { createStore } from 'redux';
 
+const initialState = {
+  counter: 0,
+  showCounter: true
+};
+
 /*
 Reducer function will produce new state snapshots.
 The reducer function has to go of spitting out a new state snapshot whenever an action reaches it.
@@ -11,23 +16,33 @@ We must not send a http request or write something to local storage or fetch som
 state - Previous state value
 action - Current or latest state value
 */
-const counterReducer = (state = { counter: 0 }, action) => {
+const counterReducer = (state = initialState, action) => {
   if (action.type === 'increment') {
     return {
-      counter: state.counter + 1
+      counter: state.counter + 1,
+      showCounter: true
     }
   }
 
   if (action.type === 'increaseBy5') {
     return {
       // Added payload to Action with action.amount (to fetch latest amount value) for generic approach
-      counter: state.counter + action.amount
+      counter: state.counter + action.amount,
+      showCounter: true
     }
   }
 
   if (action.type === 'decrement') {
     return {
-      counter: state.counter - 1
+      counter: state.counter - 1,
+      showCounter: true
+    }
+  }
+
+  if (action.type === 'toggle') {
+    return {
+      showCounter: !state.showCounter,
+      counter: state.counter
     }
   }
 
