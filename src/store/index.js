@@ -1,10 +1,41 @@
 // In an application there can be only one central data store and there cannot be more than one central data store.
 import { createStore } from 'redux';
+import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   counter: 0,
   showCounter: true
 };
+
+/*
+ A function that accepts an initial state, an object full of reducer functions, and a "slice name",
+ and automatically generates action creators and action types that correspond to the reducers and state.
+ The reducer argument is passed to createReducer().
+*/
+createSlice({
+  // Name of the slice
+  name: 'counter',
+  // The initial state for the reducer
+  initialState,
+  // An object of "case reducers". Key names will be used to generate actions.
+  reducers: {
+    // A "builder callback" function used to add more reducers, or
+    // an additional object of "case reducers", where the keys should be other
+    // action types
+    increment (state) {
+      state.counter++;
+    },
+    decrement (state) {
+      state.counter--;
+    },
+    increase (state, action) {
+      state.counter = state.counter + action.amount;
+    },
+    toggleCounter (state) {
+      state.showCounter = !state.showCounter;
+    }
+  }
+});
 
 /*
 Reducer function will produce new state snapshots.
