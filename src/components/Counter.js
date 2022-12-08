@@ -38,9 +38,9 @@ const Counter = () => {
   Because of the React update batching behavior used in React Redux v7,
   a dispatched action that causes multiple useSelector()s in the same component to return new values should only result in a single re-render.
   */
-  const counter = useSelector(state => state.counter);
+  const counter = useSelector(state => state.counter.counter);
 
-  const show = useSelector(state => state.showCounter);
+  const show = useSelector(state => state.counter.showCounter);
 
   const toggleCounterHandler = () => {
     // Dispatch action with action creator
