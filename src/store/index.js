@@ -29,7 +29,8 @@ const counterSlice = createSlice({
       state.counter--;
     },
     increase (state, action) {
-      state.counter = state.counter + action.amount;
+      // action.payload is passed through the action creator in counter.js
+      state.counter = state.counter + action.payload;
     },
     toggleCounter (state) {
       state.showCounter = !state.showCounter;
@@ -60,5 +61,7 @@ Redux wants one main reducer function, which is responsible for the global state
 const store = configureStore({
   reducer: counterSlice.reducer
 });
+
+export const counterActions = counterSlice.actions;
 
 export default store;
