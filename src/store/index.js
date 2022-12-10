@@ -15,6 +15,7 @@ an expected property by configureStore().
 Redux wants one main reducer function, which is responsible for the global state.
 */
 const store = configureStore({
+  // Map or Array of reducer
   reducer: {
     // Even we add multiple slices of state here using key pair value within the object
     counter: counterReducer,
