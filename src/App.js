@@ -1,8 +1,13 @@
+import Cart from './components/Cart/Cart';
+import Layout from './components/Layout/Layout';
+import Products from './components/Shop/Products';
+
 function App() {
   return (
-    <div>
-      <h2>Let's get started!</h2>
-    </div>
+    <Layout>
+      <Cart />
+      <Products />
+    </Layout>
   );
 }
 
