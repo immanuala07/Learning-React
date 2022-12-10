@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from 'react-redux';
 import classes from './Header.module.css';
-import { authActions } from '../store/index';
+import { authActions } from '../store/auth';
 
 const Header = () => {
   // This hook returns a reference to the dispatch function from the Redux store.
