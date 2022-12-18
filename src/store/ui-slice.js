@@ -13,7 +13,6 @@ const uiSlice = createSlice({
              which creates a new state object instead of manipulating the existing one.
             */
             state.cartIsVisible = !state.cartIsVisible;
-            console.log(state.cartIsVisible);
         }
     }
 });

@@ -5,7 +5,10 @@ import cartSlice from './cart-slice';
 
 const store = configureStore({
     // In useSelector(), ui and cart will be used to access the state values.
-    reducer: { ui: uiSlice.reducer, cart: cartSlice.reducer }
+  reducer: {
+    ui: uiSlice.reducer,
+    cart: cartSlice.reducer
+  }
 });
 
 export default store;

@@ -19,7 +19,7 @@ const Cart = (props) => {
               total: item.totalPrice,
               price: item.price
             }}
-        />
+          />
         ))}
       </ul>
     </Card>
