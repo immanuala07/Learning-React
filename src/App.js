@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import Cart from './components/Cart/Cart';
 import Layout from './components/Layout/Layout';
 import Products from './components/Shop/Products';
-import { sendCartData } from './store/cart-slice';
+import { sendCartData, fetchCartData } from './store/cart-actions';
 import Notification from './components/UI/Notification';
 
 /*
@@ -19,6 +19,12 @@ function App () {
   const showCart = useSelector((state) => state.ui.cartIsVisible);
   const cart = useSelector((state) => state.cart);
   const notification = useSelector((state) => state.ui.notification);
+
+  // useEffect allows us to run side effects when this component was rendered for the first time.
+  useEffect(() => {
+    // To fetch the data into chart on the initial load.
+    dispatch(fetchCartData());
+  }, [dispatch]);
 
   // useEffect allows us to run side effects.
   useEffect(() => {
