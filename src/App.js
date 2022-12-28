@@ -22,6 +22,12 @@ function App () {
 
   // useEffect allows us to run side effects.
   useEffect(() => {
+    dispatch(uiActions.showNotification({
+      status: 'pending',
+      title: 'Sending!',
+      message: 'Sending cart data successfully!'
+    }));
+
     const sendCartData = async () => {
       /*
       HTTP request methods:
@@ -64,15 +70,6 @@ function App () {
       );
     };
 
-    /*
-    Below variable outside the component,
-    so that it doesn't change and it's not re-initialized.
-    */
-    if (isInital) {
-      isInital = false;
-      return;
-    }
-
     sendCartData().catch((error) => {
       dispatch(
         uiActions.showNotification({
@@ -82,6 +79,15 @@ function App () {
         })
       );
     });
+
+    /*
+    Below variable outside the component,
+    so that it doesn't change and it's not re-initialized.
+    */
+    if (isInital) {
+      isInital = false;
+      return;
+    }
 
     /*
       The dispatch function is actually also a dependency now.
