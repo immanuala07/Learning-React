@@ -40,7 +40,11 @@ export const fetchCartData = (cart) => {
 
         try {
             const cartData = await fetchData();
-            dispatch(cartActions.replaceCart(cartData));
+            dispatch(cartActions.replaceCart({
+                // TO avoid the error of undefined when the cart is empty so we are using the below line
+                items: cartData.items || [],
+                totalQuantity: cartData.totalQuantity
+            }));
         } catch (error) {
             uiActions.showNotification({
                 status: 'error',
@@ -103,7 +107,12 @@ export const sendCartData = (cart) => {
                 'https://react-http-1e116-default-rtdb.firebaseio.com/cart.json',
                 {
                     method: 'PUT',
-                    body: JSON.stringify(cart)
+                    // We are spliting or defining the object properties
+                    // just to avoid or omit the 'changed' property in the cart state.
+                    body: JSON.stringify({
+                        items: cart.items,
+                        totalQuantity: cart.totalQuantity
+                    })
                 }
             );
 

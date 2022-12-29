@@ -37,31 +37,33 @@ function App () {
       return;
     }
 
-    /*
-    Before we dispatched always with action creators,
-    So that the function that return an action object with a type and so on.
-
-    Now in cart-slice.js, we are dispatching a function that returns another function.
-    The great thing about Redux, when using Redux toolkit,
-    It doesn't just accept action objects with a type property.
-    Instead, it also accepts the action creators that return functions.
-    If it is noticed that we are dispatching an action which is actually a function, instead of action object.
-    So Redux will execute that function for us.
-
-    There's a common pattern that we wanna have action creators
-    that can perform side effects and that can then dispatch other actions,
-    which will eventually reach the reducers as part of a flow of side-effects,
-    or as a flow of steps that should be taken.
-    And that's what we have here.
-    So we can use a function that returns another function,
-    as a action as well.
-    That is built into Redux when using Redux toolkit.
-
-    This approach will keep our components lean, to not have too much logic in them.
-    And by moving that logic to this action creator function,
-    we did achieved this.
-    */
-    dispatch(sendCartData(cart));
+    if (cart.changed) {
+      /*
+      Before we dispatched always with action creators,
+      So that the function that return an action object with a type and so on.
+  
+      Now in cart-slice.js, we are dispatching a function that returns another function.
+      The great thing about Redux, when using Redux toolkit,
+      It doesn't just accept action objects with a type property.
+      Instead, it also accepts the action creators that return functions.
+      If it is noticed that we are dispatching an action which is actually a function, instead of action object.
+      So Redux will execute that function for us.
+  
+      There's a common pattern that we wanna have action creators
+      that can perform side effects and that can then dispatch other actions,
+      which will eventually reach the reducers as part of a flow of side-effects,
+      or as a flow of steps that should be taken.
+      And that's what we have here.
+      So we can use a function that returns another function,
+      as a action as well.
+      That is built into Redux when using Redux toolkit.
+  
+      This approach will keep our components lean, to not have too much logic in them.
+      And by moving that logic to this action creator function,
+      we did achieved this.
+      */
+      dispatch(sendCartData(cart));
+    }
 
     /*
       The dispatch function is actually also a dependency now.
