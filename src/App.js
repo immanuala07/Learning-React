@@ -1,7 +1,7 @@
 import { Route } from "react-router-dom";
 
-import Welcome from './components/Welcome';
-import Products from './components/Product';
+import Welcome from './pages/Welcome';
+import Products from './pages/Product';
 
 function App () {
   return (
