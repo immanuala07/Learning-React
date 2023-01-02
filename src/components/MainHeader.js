@@ -1,8 +1,10 @@
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+
+import classes from '../components/MainHeader.module.css';
 
 const MainHeader = () => {
 	return (
-		<header>
+		<header className={classes.header}>
 			<nav>
 				<ul>
 					<li>
@@ -19,7 +21,19 @@ const MainHeader = () => {
 						By using <Link> tag we are not sending a new page request but instead
 						we are nagivating in the single page application(SPA).
 						*/}
-						<Link to="/welcome">Welcome</Link>
+						{/* <Link to="/welcome">Welcome</Link> */}
+
+						{/* 
+						A <NavLink> is a special kind of <Link> that knows whether or not it is "active".
+						NavLink also will set a CSS class on the active anchor item.
+
+						This is useful when building a navigation menu such as a breadcrumb or a set of tabs 
+						where you'd like to show which of them is currently selected.
+						It also provides useful context for assistive technology like screen readers.
+						*/}
+						<NavLink activeClassName={classes.active} to="/welcome">
+							Welcome
+						</NavLink>
 					</li>
 					<li>
 						{/* 						
@@ -35,7 +49,22 @@ const MainHeader = () => {
 						By using <Link> tag we are not sending a new page request but instead
 						we are nagivating in the single page application(SPA).
 						*/}
-						<Link to="/products">Products</Link>
+						{/* <Link to="/products">Products</Link> */}
+
+						{/* 
+						A <NavLink> is a special kind of <Link> that knows whether or not it is "active".
+						NavLink also will set a CSS class on the active anchor item.
+						
+						This is useful when building a navigation menu such as a breadcrumb or a set of tabs 
+						where you'd like to show which of them is currently selected.
+						It also provides useful context for assistive technology like screen readers.
+						*/}
+						<NavLink
+							activeClassName={classes.active}
+							to="/products"
+						>
+							Products
+						</NavLink>
 					</li>
 				</ul>
 			</nav>
