@@ -35,6 +35,5 @@ function App () {
 
 export default App;
 
-
 // our-domain.com/welcome => Welcome Component
 // our-domain.com/welcome => Products Component
