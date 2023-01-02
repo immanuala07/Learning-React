@@ -8,7 +8,7 @@ const ProductDetail = () => {
 
     Child routes inherit all params from their parent routes.
 
-    if the URL is 'http://localhost:3000/product-detail/product123' then useParam()
+    if the URL is 'http://localhost:3000/product-detail/product123' then useParams()
     would strip the value for the key ':productId' as 'product123'.
     */
 	const params = useParams();
@@ -17,7 +17,7 @@ const ProductDetail = () => {
 		<section>
 			<h1>Product Detail</h1>
 			{/*
-            If the URL is 'http://localhost:3000/product-detail/product123' then useParam()
+            If the URL is 'http://localhost:3000/product-detail/product123' then useParams()
             would strip the value for the key ':productId' as 'product123'.
             */}
 			<p>{params.productId}</p>
