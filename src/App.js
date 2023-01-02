@@ -1,4 +1,4 @@
-import { Route, Switch } from 'react-router-dom';
+import { Redirect, Route, Switch } from 'react-router-dom';
 
 import Welcome from './pages/Welcome';
 import Products from './pages/Product';
@@ -24,6 +24,35 @@ function App() {
 				instead of executing multiple <Route> components at once or same time.
 				*/}
 				<Switch>
+					{/*
+					Route is a component that allows us to define a certain path,
+					and then the React component that should be loaded
+					when that path becomes active in the URL.
+					
+					Path prop in <Route><Route/>: The path pattern to match against the URL to determine
+					if this route matches a URL, link href, or form action.
+					
+					'exact' prop in <Route> component 
+					When true, will only match if the path matches the location.pathname exactly.
+					By using exact prop in route component, we avoid loading both 
+					<Products> component and <ProductDetail> component at the same time.
+
+					We are also able to load the below componenrt only whne the url is as below:
+					'http://localhost:3000/products'
+					
+					We are not able to load the below componenrt only whne the url is as below:
+					'http://localhost:3000/products/p1'
+					*/}
+					<Route path="/" exact>
+						{/*
+						Rendering a <Redirect> will navigate to a new location.
+						
+						The new location will override the current location in the history stack,
+						like server-side redirects (HTTP 3xx) do.
+						*/}
+						<Redirect to="/welcome" />
+					</Route>
+
 					<Route path="/welcome">
 						<Welcome />
 					</Route>
