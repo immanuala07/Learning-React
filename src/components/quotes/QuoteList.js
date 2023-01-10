@@ -81,6 +81,19 @@ const QuoteList = (props) => {
 		and it doesn't allows the user to go back to the previous page.
 		*/
 		history.push('/quotes?sort=' + (isSortingAscending ? 'desc' : 'asc'));
+
+		// (OR)
+		/*
+		React Router allows us to use an alternative description off the destination
+		a link should lead to or this programmatic navigation should lead to.
+		The below push method is used for complex url,
+		we can also pass an object which describes the target's destination.
+		*/
+		// history.push({
+		// 	pathname: location.pathname,
+		// 	search: `?sort=${isSortingAscending ? 'desc' : 'asc'}`
+		// });
+
 		/*
 		Pushing this page will rerenders this component.
 		Because when we push a page, even if it's the page we're currently on,
