@@ -1,6 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import HomePage from './pages/Home';
+import ProductPage from './pages/Product';
 
 /*
 createBrowserRouter() - This is the recommended router for all React Router web projects.
@@ -10,7 +11,8 @@ It also enables the v6.4 data APIs like loaders, actions, fetchers and more.
 It also takes an array of route objects as parameter.
 */
 const router = createBrowserRouter([
-	{ path: '/', element: <HomePage /> }
+	{ path: '/', element: <HomePage /> },
+	{ path: '/products', element: <ProductPage /> }
 ]);
 
 function App() {
