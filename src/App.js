@@ -7,6 +7,7 @@ import {
 	RouterProvider
 } from 'react-router-dom';
 
+import ErrorPage from './pages/Error';
 import HomePage from './pages/Home';
 import ProductPage from './pages/Product';
 import RootLayout from './pages/Root';
@@ -36,6 +37,18 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <RootLayout />,
+
+		/*
+		(errorElement): If the user try to enter into the URL that doesn't exist,
+		the react-router-dom package will automatically generate an error,
+		and that error will automatically bubble up to our root route definition.
+		
+		So, the route that is defined for path slash nothing ('\'),
+		we can add the error element property as well.
+		And then say that for this page, for this route,
+		we wanna render the error page as a fallback page, if an error occurs.
+		*/
+		errorElement: <ErrorPage />,
 		children: [
 			{ path: '/', element: <HomePage /> },
 			{ path: '/products', element: <ProductPage /> }
