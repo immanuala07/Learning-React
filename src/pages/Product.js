@@ -14,7 +14,8 @@ function ProductPage() {
 				{PRODUCTS.map((prod) => {
 					return (
 						<li key={prod.id}>
-							<Link to={`/products/${prod.id}`}>
+							{/* Relative Path without '/' */}
+							<Link to={prod.id}>
 								{prod.title}
 							</Link>
 						</li>

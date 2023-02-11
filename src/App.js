@@ -51,9 +51,10 @@ const router = createBrowserRouter([
 		*/
 		errorElement: <ErrorPage />,
 		children: [
-			{ path: '/', element: <HomePage /> },
-			{ path: '/products', element: <ProductPage /> },
-			{ path: '/products/:productId', element: <ProductDetailPage /> }
+			// Relative Path without /
+			{ path: '', element: <HomePage /> },
+			{ path: 'products', element: <ProductPage /> },
+			{ path: 'products/:productId', element: <ProductDetailPage /> }
 		]
 	}
 ]);
