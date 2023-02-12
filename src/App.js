@@ -52,7 +52,12 @@ const router = createBrowserRouter([
 		errorElement: <ErrorPage />,
 		children: [
 			// Relative Path without /
-			{ path: '', element: <HomePage /> },
+			/*
+			index prop in <Route> - Determines if the route is an index route.
+			Index routes render into their parent's Outlet at their parent's URL
+			(like a default child route).
+			*/
+			{ index: true, element: <HomePage /> },
 			{ path: 'products', element: <ProductPage /> },
 			{ path: 'products/:productId', element: <ProductDetailPage /> }
 		]
