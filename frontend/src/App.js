@@ -41,7 +41,32 @@ const router = createBrowserRouter([
 				path: 'events',
 				element: <EventRootLayout />,
 				children: [
-					{ index: true, element: <Events /> },
+					{
+						index: true,
+						element: <Events />,
+						/*
+						In route component, loader props is added.
+						Each route can define a "loader" function to provide
+						data to the route element before the compoenent renders.
+
+						As the user navigates around the app,
+						the loaders for the next matching branch of routes
+						will be called in parallel and their data made
+						available to components through useLoaderData.
+						*/
+						loader: async () => {
+							const response = await fetch(
+								'http://localhost:8080/events'
+							);
+
+							if (!response.ok) {
+								// ...
+							} else {
+								const resData = await response.json();
+								return resData.events;
+							}
+						}
+					},
 					{ path: ':eventId', element: <EventDetail /> },
 					{ path: 'new', element: <NewEvent /> },
 					{ path: ':eventId/edit', element: <EditEvent /> }
