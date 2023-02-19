@@ -35,3 +35,19 @@ function EventsPage() {
 }
 
 export default EventsPage;
+
+/*
+Loader function can be moved from App.js to Event.js
+This function is exported here and imported in App.js
+This makes the App.js makes the component leaner
+*/
+export const loader = async () => {
+	const response = await fetch('http://localhost:8080/events');
+
+	if (!response.ok) {
+		// ...
+	} else {
+		const resData = await response.json();
+		return resData.events;
+	}
+};
