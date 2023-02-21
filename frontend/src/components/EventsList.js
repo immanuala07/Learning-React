@@ -1,8 +1,8 @@
-import { useLoaderData } from 'react-router-dom';
+// import { useLoaderData } from 'react-router-dom';
 
 import classes from './EventsList.module.css';
 
-function EventsList() {
+function EventsList({ events }) {
 	/*
 	This hook provides the value returned from your route loader.
 
@@ -29,7 +29,7 @@ function EventsList() {
 	not just the Route element.
 	It will return the data from the nearest route on context.
 	*/
-	const events = useLoaderData();
+	// const events = useLoaderData();
 
 	return (
 		<div className={classes.events}>

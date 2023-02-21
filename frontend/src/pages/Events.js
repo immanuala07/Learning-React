@@ -1,4 +1,4 @@
-// import { useLoaderData } from 'react-router-dom';
+import { useLoaderData } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
@@ -29,9 +29,10 @@ function EventsPage() {
 	not just the Route element.
 	It will return the data from the nearest route on context.
 	*/
-	// const events = useLoaderData();
+	const data = useLoaderData();
+	const events = data.events;
 
-	return <EventsList />;
+	return <EventsList events={events} />;
 }
 
 export default EventsPage;
@@ -47,7 +48,7 @@ export const loader = async () => {
 	if (!response.ok) {
 		// ...
 	} else {
-		const resData = await response.json();
-		return resData.events;
+		// Loader function can return any kind of data in the function.
+		return response;
 	}
 };
