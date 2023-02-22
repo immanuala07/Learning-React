@@ -32,6 +32,10 @@ function EventsPage() {
 	const data = useLoaderData();
 	const events = data.events;
 
+	// if (data.isError) {
+	// 	return <p>{data.events}</p>;
+	// }
+
 	return <EventsList events={events} />;
 }
 
@@ -46,7 +50,8 @@ export const loader = async () => {
 	const response = await fetch('http://localhost:8080/events');
 
 	if (!response.ok) {
-		// ...
+		// return { isError: true, message: 'Could not fetch events.' };
+		throw { message: 'Could not fetch events.' }; // eslint-disable-line no-throw-literal
 	} else {
 		// Loader function can return any kind of data in the function.
 		return response;

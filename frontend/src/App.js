@@ -7,6 +7,7 @@ import Home from "./pages/Home";
 import NewEvent from "./pages/NewEvent";
 import RootLayout from './pages/Root';
 import EventRootLayout from './pages/EventRootLayout';
+import ErrorPage from './pages/Error';
 
 // Challenge / Exercise
 
@@ -34,6 +35,8 @@ const router = createBrowserRouter([
 	{
 		path: '/',
 		element: <RootLayout />,
+		// If any error occured in the root component or child route the error bubbles up to the below error element
+		errorElement: <ErrorPage />,
 		children: [
 			{ index: true, element: <Home /> },
 			// Nested Route using object within the children array
