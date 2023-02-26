@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import EditEvent from "./pages/EditEvent";
-import EventDetail from "./pages/EventDetail";
+import EventDetail, { loader as EventDetailLoader } from "./pages/EventDetail";
 import Events, { loader as eventsLoader } from "./pages/Events";
 import Home from "./pages/Home";
 import NewEvent from "./pages/NewEvent";
@@ -59,7 +59,21 @@ const router = createBrowserRouter([
 						*/
 						loader: eventsLoader
 					},
-					{ path: ':eventId', element: <EventDetail /> },
+					{
+						path: ':eventId',
+						element: <EventDetail />,
+						/*
+						In route component, loader props is added.
+						Each route can define a "loader" function to provide
+						data to the route element before the compoenent renders.
+
+						As the user navigates around the app,
+						the loaders for the next matching branch of routes
+						will be called in parallel and their data made
+						available to components through useLoaderData.
+						*/
+						loader: EventDetailLoader
+					},
 					{ path: 'new', element: <NewEvent /> },
 					{ path: ':eventId/edit', element: <EditEvent /> }
 				]
