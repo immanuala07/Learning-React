@@ -51,7 +51,18 @@ export const loader = async () => {
 
 	if (!response.ok) {
 		// return { isError: true, message: 'Could not fetch events.' };
-		throw { message: 'Could not fetch events.' }; // eslint-disable-line no-throw-literal
+
+		// throw { message: 'Could not fetch events.' }; // eslint-disable-line no-throw-literal
+
+		throw new Response(
+			/*
+			The Response() constructor creates a new Response object.
+			status - The status code for the response, e.g., 200.
+			data - An object defining a body for the response.
+			*/
+			JSON.stringify({ message: 'Could not fetch events.' }),
+			{ status: 500 }
+		);
 	} else {
 		// Loader function can return any kind of data in the function.
 		return response;
