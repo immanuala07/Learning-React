@@ -1,4 +1,4 @@
-import { useLoaderData } from 'react-router-dom';
+import { json, useLoaderData } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
@@ -54,15 +54,28 @@ export const loader = async () => {
 
 		// throw { message: 'Could not fetch events.' }; // eslint-disable-line no-throw-literal
 
-		throw new Response(
-			/*
-			The Response() constructor creates a new Response object.
-			status - The status code for the response, e.g., 200.
-			data - An object defining a body for the response.
-			*/
-			JSON.stringify({ message: 'Could not fetch events.' }),
-			{ status: 500 }
-		);
+		// throw new Response(
+		// 	/*
+		// 	The Response() constructor creates a new Response object.
+		// 	status - The status code for the response, e.g., 200.
+		// 	data - An object defining a body for the response.
+		// 	*/
+		// 	JSON.stringify({ message: 'Could not fetch events.' }),
+		// 	{ status: 500 }
+		// );
+
+		/*
+		A shortcut for :-
+
+		new Response(JSON.stringify(someValue), {
+			headers: {
+				"Content-Type": "application/json; utf-8",
+			},
+		});
+
+		This is shortcut for Response object so we use the json() function in loaders function of react router.
+		*/
+		throw json({ message: 'Could not fetch events.' }, { status: 500 });
 	} else {
 		// Loader function can return any kind of data in the function.
 		return response;

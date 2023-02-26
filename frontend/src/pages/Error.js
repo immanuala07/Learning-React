@@ -19,7 +19,8 @@ function ErrorPage() {
 	let message = 'Something went wrong!';
 
 	if (error.status === 500) {
-		message = JSON.parse(error.data).message;
+		// Since we are using json() utlity function so we are getting a parsed object (error.data).
+		message = error.data.message;
 	}
 
 	if (error.status === 404) {
