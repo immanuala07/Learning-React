@@ -36,6 +36,23 @@ const EventDetailPage = () => {
 
 export default EventDetailPage;
 
+/*
+request - This is a Fetch Request instance being made to your application.
+					React Router sends the request to your loaders.
+					function loader({ request }) {}
+		
+params - Route params are parsed from dynamic segments and passed to your loader.
+				This is useful for figuring out which resource to load:
+				createBrowserRouter([
+					{
+						path: "/teams/:teamId",
+						loader: ({ params }) => {
+							return fakeGetTeam(params.teamId);
+						},
+					},
+				]);
+				Note that the :teamId in the path is parsed as provided as params.teamId by the same name.
+*/
 export const loader = async ({ request, params }) => {
 	const id = params.eventId;
 
