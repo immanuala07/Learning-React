@@ -76,7 +76,7 @@ const router = createBrowserRouter([
 						not just to use a wrapper layout component
 						but also to use a shared loader function.
 
-						Now we can access loader data with useLoaderData() hook provided
+						Now we can access loader data with useRouteLoaderData() hook provided
 						by React router in any component that's on the same level or a lower level
 						than the route where the loader is added to.
 						So with that, this loader will execute
