@@ -61,7 +61,7 @@ const router = createBrowserRouter([
 					},
 					{
 						path: ':eventId',
-						element: <EventDetail />,
+						id: 'event-detail',
 						/*
 						In route component, loader props is added.
 						Each route can define a "loader" function to provide
@@ -71,11 +71,42 @@ const router = createBrowserRouter([
 						the loaders for the next matching branch of routes
 						will be called in parallel and their data made
 						available to components through useLoaderData.
+						
+						We can also use the nested routes feature
+						not just to use a wrapper layout component
+						but also to use a shared loader function.
+
+						Now we can access loader data with useLoaderData() hook provided
+						by React router in any component that's on the same level or a lower level
+						than the route where the loader is added to.
+						So with that, this loader will execute
+						whenever we visit this or this route.
+						And this allows us to reuse the logic
+						and data of that loader in both these routes down here in children.
 						*/
-						loader: EventDetailLoader
+						loader: EventDetailLoader,
+						children: [
+							{
+								/*
+								We can also use the nested routes feature
+								not just to use a wrapper layout component
+								but also to use a shared loader function.
+								*/
+								index: true,
+								element: <EventDetail />
+							},
+							{
+								/*
+								We can also use the nested routes feature
+								not just to use a wrapper layout component
+								but also to use a shared loader function.
+								*/
+								path: 'edit',
+								element: <EditEvent />
+							}
+						]
 					},
-					{ path: 'new', element: <NewEvent /> },
-					{ path: ':eventId/edit', element: <EditEvent /> }
+					{ path: 'new', element: <NewEvent /> }
 				]
 			}
 		]
