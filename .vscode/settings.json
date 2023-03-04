@@ -7,5 +7,5 @@
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},
 	"editor.formatOnSaveMode": "modifications",
-	"prettier.singleQuote": true
+	"prettier.singleQuote": false
 }
