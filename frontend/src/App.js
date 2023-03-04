@@ -1,10 +1,10 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import EditEvent from "./pages/EditEvent";
-import EventDetail, { loader as EventDetailLoader } from "./pages/EventDetail";
+import EventDetail, { loader as eventDetailLoader } from "./pages/EventDetail";
 import Events, { loader as eventsLoader } from "./pages/Events";
 import Home from "./pages/Home";
-import NewEvent from "./pages/NewEvent";
+import NewEvent, { action as newEventAction } from "./pages/NewEvent";
 import RootLayout from './pages/Root';
 import EventRootLayout from './pages/EventRootLayout';
 import ErrorPage from './pages/Error';
@@ -84,7 +84,7 @@ const router = createBrowserRouter([
 						And this allows us to reuse the logic
 						and data of that loader in both these routes down here in children.
 						*/
-						loader: EventDetailLoader,
+						loader: eventDetailLoader,
 						children: [
 							{
 								/*
@@ -106,7 +106,29 @@ const router = createBrowserRouter([
 							}
 						]
 					},
-					{ path: 'new', element: <NewEvent /> }
+					{
+						path: "new",
+						element: <NewEvent />,
+						/*
+						The url to which the form will be submitted,
+						just like HTML form action.
+						
+						The only difference is the default action.
+						With HTML forms, it defaults to the full URL.
+						
+						With React Router <Form>,
+						it defaults to the relative URL of the closest route in context.
+
+						When the user submits the form,
+						React Router will match the action to the app's routes
+						and call the <Route action> with the serialized FormData.
+						
+						When the action completes,
+						all of the loader data on the page will automatically revalidate
+						to keep your UI in sync with your data.
+						*/
+						action: newEventAction
+					}
 				]
 			}
 		]

@@ -1,15 +1,26 @@
-import { useNavigate } from 'react-router-dom';
+import { Form } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
 function EventForm({ method, event }) {
-  const navigate = useNavigate();
-  function cancelHandler() {
-    navigate('..');
-  }
+  function cancelHandler() {}
 
   return (
-    <form className={classes.form}>
+    /*
+    The Form component is a wrapper around a plain HTML form that
+    emulates the browser for client side routing and data mutations.
+    It is not a form validation/state management library
+    like you might be used to in the React ecosystem
+
+    Note: Make sure our input tags have name prop
+    or else the FormData will not include that field's value.
+
+    method prop in <Form> - This determines the HTTP verb to be used.
+    The same as plain HTML form method, except it also supports "put", "patch", and "delete"
+    in addition to "get" and "post".
+    The default is "get".
+    */
+    <Form method="post" className={classes.form}>
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -56,7 +67,7 @@ function EventForm({ method, event }) {
         </button>
         <button>Save</button>
       </div>
-    </form>
+    </Form>
   );
 }
 
