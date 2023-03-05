@@ -1,8 +1,16 @@
-import { Form, useNavigate, useNavigation } from 'react-router-dom';
+import { Form, useActionData, useNavigate, useNavigation } from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
 function EventForm ({ method, event }) {
+  /*
+  This hook provides the returned value from the previous navigation's action result,
+  or undefined if there was no submission.
+  The most common use-case for this hook is form validation errors.
+  useActionData() return the action function data.
+  */
+  const data = useActionData();
+
   // The useNavigate hook returns a function that lets you navigate programmatically.
   const navigate = useNavigate();
 
@@ -54,6 +62,16 @@ function EventForm ({ method, event }) {
     The default is "get".
     */
     <Form method="post" className={classes.form}>
+
+      {data && data.errors && (
+        <ul>
+          {/* Object.values() returns an array. */}
+          {Object.values(data.errors).map((err) => (
+            <li key={err}>{err}</li>
+          ))}
+        </ul>
+      )}
+
       <p>
         <label htmlFor="title">Title</label>
         <input
@@ -91,7 +109,7 @@ function EventForm ({ method, event }) {
           name="description"
           rows="5"
           required
-          defaultValue={event ? event.description : ''}
+          defaultValue={event ? event.description : ''}s
         />
       </p>
       <div className={classes.actions}>

@@ -38,6 +38,11 @@ export async function action ({ request, params }) {
 		body: JSON.stringify(eventData)
 	});
 
+	// Capture the backened or server error code and return the response.
+	if (response.status === 422) {
+		return response;
+	}
+
 	if (!response.ok) {
 		throw json({ message: "Could not save event" }, { status: 500 });
 	}
