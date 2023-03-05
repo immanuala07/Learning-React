@@ -2,7 +2,7 @@
 	"editor.formatOnSave": false,
 	"editor.formatOnPaste": true,
 	"editor.formatOnType": true,
-	"editor.defaultFormatter": "vscode.typescript-language-features",
+	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
 	},

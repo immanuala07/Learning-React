@@ -1,4 +1,11 @@
-import { Form, useActionData, useNavigate, useNavigation } from 'react-router-dom';
+import {
+  Form,
+  useActionData,
+  useNavigate,
+  useNavigation,
+  json,
+  redirect
+} from 'react-router-dom';
 
 import classes from './EventForm.module.css';
 
@@ -60,9 +67,10 @@ function EventForm ({ method, event }) {
     The same as plain HTML form method, except it also supports "put", "patch", and "delete"
     in addition to "get" and "post".
     The default is "get".
-    */
-    <Form method="post" className={classes.form}>
 
+    method value is set dynamically in EditEvent.js and NewEvent.js
+    */
+    <Form method={method} className={classes.form}>
       {data && data.errors && (
         <ul>
           {/* Object.values() returns an array. */}
@@ -109,7 +117,7 @@ function EventForm ({ method, event }) {
           name="description"
           rows="5"
           required
-          defaultValue={event ? event.description : ''}s
+          defaultValue={event ? event.description : ''}
         />
       </p>
       <div className={classes.actions}>
@@ -129,3 +137,54 @@ function EventForm ({ method, event }) {
 }
 
 export default EventForm;
+
+export async function action({ request, params }) {
+  const method = request.method;
+
+  /*
+  When the user submits the form,
+  React Router will match the action to the app's routes
+  and call the <Route action> with the serialized FormData.
+  
+  When the action completes,
+  all of the loader data on the page will automatically revalidate
+  to keep your UI in sync with your data.
+  */
+  const data = await request.formData();
+
+  const eventData = {
+    title: data.get("title"),
+    image: data.get("image"),
+    date: data.get("date"),
+    description: data.get("description")
+  };
+
+  let url = "http://localhost:8080/events";
+
+  if (method === 'PATCH') {
+    const eventId = params.eventId;
+    url = "http://localhost:8080/events/" + eventId;
+  }
+
+  const response = await fetch(url, {
+    method: method,
+    /*
+    Headers - Represents response/request headers,
+    allowing you to query them and take different actions
+    depending on the results.
+    */
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(eventData)
+  });
+
+  // Capture the backened or server error code and return the response.
+  if (response.status === 422) {
+    return response;
+  }
+
+  if (!response.ok) {
+    throw json({ message: "Could not save event" }, { status: 500 });
+  }
+
+  return redirect("/events");
+}

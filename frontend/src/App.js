@@ -7,10 +7,11 @@ import EventDetail, {
 } from "./pages/EventDetail";
 import Events, { loader as eventsLoader } from "./pages/Events";
 import Home from "./pages/Home";
-import NewEvent, { action as newEventAction } from "./pages/NewEvent";
+import NewEvent from "./pages/NewEvent";
 import RootLayout from './pages/Root';
 import EventRootLayout from './pages/EventRootLayout';
 import ErrorPage from './pages/Error';
+import { action as manipulateEventAction } from './components/EventForm';
 
 // Challenge / Exercise
 
@@ -96,8 +97,8 @@ const router = createBrowserRouter([
 								but also to use a shared loader function.
 								*/
 								index: true,
-								element: <EventDetail />, 
-								action:deleteEventAction
+								element: <EventDetail />,
+								action: deleteEventAction
 							},
 							{
 								/*
@@ -106,7 +107,26 @@ const router = createBrowserRouter([
 								but also to use a shared loader function.
 								*/
 								path: 'edit',
-								element: <EditEvent />
+								element: <EditEvent />,
+								/*
+								The url to which the form will be submitted,
+								just like HTML form action.
+								
+								The only difference is the default action.
+								With HTML forms, it defaults to the full URL.
+								
+								With React Router <Form>,
+								it defaults to the relative URL of the closest route in context.
+
+								When the user submits the form,
+								React Router will match the action to the app's routes
+								and call the <Route action> with the serialized FormData.
+								
+								When the action completes,
+								all of the loader data on the page will automatically revalidate
+								to keep your UI in sync with your data.
+								*/
+								action: manipulateEventAction
 							}
 						]
 					},
@@ -131,7 +151,7 @@ const router = createBrowserRouter([
 						all of the loader data on the page will automatically revalidate
 						to keep your UI in sync with your data.
 						*/
-						action: newEventAction
+						action: manipulateEventAction
 					}
 				]
 			}
