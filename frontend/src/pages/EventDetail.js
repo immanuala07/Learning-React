@@ -1,4 +1,4 @@
-import { useRouteLoaderData, json } from "react-router-dom";
+import { useRouteLoaderData, json, redirect } from "react-router-dom";
 
 import EventItem from '../components/EventItem';
 
@@ -48,4 +48,38 @@ export const loader = async ({ request, params }) => {
 	} else {
 		return response;
 	}
+};
+
+/*
+request - This is a Fetch Request instance being made to your application.
+					React Router sends the request to your loaders.
+					function loader({ request }) {}
+		
+params - Route params are parsed from dynamic segments and passed to your loader.
+				This is useful for figuring out which resource to load:
+				createBrowserRouter([
+					{
+						path: "/teams/:teamId",
+						loader: ({ params }) => {
+							return fakeGetTeam(params.teamId);
+						},
+					},
+				]);
+				Note that the :teamId in the path is parsed as provided as params.teamId by the same name.
+*/
+export const action = async ({ request, params }) => {
+	const eventId = params.eventId;
+
+	const response = await fetch("http://localhost:8080/events/" + eventId, {
+		method: request.method
+	});
+
+	if (!response.ok) {
+		throw json(
+			{ message: "Could not delete event." },
+			{ status: 500 }
+		);
+	}
+	
+	return redirect('/events');
 };
