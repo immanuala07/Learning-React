@@ -1,4 +1,5 @@
-import { json, useLoaderData } from 'react-router-dom';
+import { Suspense } from 'react';
+import { json, useLoaderData,defer, Await } from 'react-router-dom';
 
 import EventsList from '../components/EventsList';
 
@@ -29,24 +30,68 @@ function EventsPage() {
 	not just the Route element.
 	It will return the data from the nearest route on context.
 	*/
-	const data = useLoaderData();
-	const events = data.events;
+	const {events} = useLoaderData();
 
 	// if (data.isError) {
 	// 	return <p>{data.events}</p>;
 	// }
 
-	return <EventsList events={events} />;
+	return (
+
+		/*
+		Suspense is a feature for managing asynchronous operations in a React app.
+		It lets your components communicate to React that they’re waiting for some data.
+
+		It simply lets you render a fallback declaratively
+		while a component is waiting for some asynchronous operation
+		(i.e., a network request) to be completed.
+
+
+		<Suspense> component that lets you “wait” for some code to load
+		and declaratively specify a loading state (like a spinner) while we’re waiting.
+
+		<Suspense> - lets you display a fallback until its children have finished loading.
+
+				<Suspense fallback={<Loading />}>
+					<SomeComponent />
+				</Suspense>
+		*/
+		<Suspense fallback={<p style={{ textAlign: "center" }}>Loading...</p>}>
+
+			{/*
+			Imagine a scenario where one of your routes' loaders needs to retrieve some data
+			that for one reason or another is quite slow.
+
+			<Await> - Used to render deferred values with automatic error handling.
+			Make sure to review the Deferred Data Guide
+			since there are a few APIs that work together with this component.
+
+			Note: <Await> expects to be rendered inside of a <React.Suspense>
+			or <React.SuspenseList> parent to enable the fallback UI.
+
+
+			{children} of <Await> Component - Can either be React elements or a function.
+			When using a function, the value is provided as the only parameter.
+
+
+			resolve - Takes a promise returned from a
+			deferred loader value to be resolved and rendered.
+			*/}
+			<Await resolve={events}>
+
+				{/*
+				{children} of <Await> Component - Can either be React elements or a function.
+				When using a function, the value is provided as the only parameter.
+				*/}
+				{(loadedEvents) => <EventsList events={loadedEvents} />}
+			</Await>
+		</Suspense>
+	);
 }
 
 export default EventsPage;
 
-/*
-Loader function can be moved from App.js to Event.js
-This function is exported here and imported in App.js
-This makes the App.js makes the component leaner
-*/
-export const loader = async () => {
+export const loadEvents = async () => {
 	const response = await fetch('http://localhost:8080/events');
 
 	if (!response.ok) {
@@ -77,7 +122,32 @@ export const loader = async () => {
 		*/
 		throw json({ message: 'Could not fetch events.' }, { status: 500 });
 	} else {
-		// Loader function can return any kind of data in the function.
-		return response;
+		/*
+		Since we are using defer to invoke this function,
+		so we have to extract the json() from response (response.json())
+		and send the exact data.
+		*/
+		const resData = await response.json();
+
+		return resData.events;
 	}
+};
+
+
+/*
+Loader function can be moved from App.js to Event.js
+This function is exported here and imported in App.js
+This makes the App.js makes the component leaner
+*/
+export const loader = () => {
+
+	/*
+	This utility allows you to defer values returned from loaders
+	by passing PROMISES instead of RESOLVED values.
+	*/
+	return defer({
+
+		// Calling a function which returns a promise
+		events: loadEvents()
+	});
 };
