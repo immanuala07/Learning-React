@@ -37,7 +37,11 @@ function EventsList({ events }) {
 			<ul className={classes.list}>
 				{events.map((event) => (
 					<li key={event.id} className={classes.item}>
-						<Link to={event.id}>
+						{/*
+						We edit the link path so that it works,
+						when the page is loaded through events page or through different page.
+						*/}
+						<Link to={`/events/${event.id}`}>
 							<img src={event.image} alt={event.title} />
 							<div className={classes.content}>
 								<h2>{event.title}</h2>
