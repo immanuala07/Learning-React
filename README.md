@@ -195,3 +195,5 @@ Learning React.js - Step by Step
 * [190-React_Router_6_8-PP-Behind-the-Scenes-Work-with-useFetcher-Function](https://github.com/immanuala07/Learning-React/tree/190-React_Router_6_8-PP-Behind-the-Scenes-Work-with-useFetcher-Function)
 * [191-React_Router_6_8-PP-Deferring-Data-Fetching-with-Defer-Function](https://github.com/immanuala07/Learning-React/tree/191-React_Router_6_8-PP-Deferring-Data-Fetching-with-Defer-Function)
 * [192-React_Router_6_8-PP-Controlling-Which-Data-Should-Be-Deferred](https://github.com/immanuala07/Learning-React/tree/192-React_Router_6_8-PP-Controlling-Which-Data-Should-Be-Deferred)
+* [193-React_Authentication-Initial_Project_Setup_And_Route_Setup](https://github.com/immanuala07/Learning-React/tree/193-React_Authentication-Initial_Project_Setup_And_Route_Setup)
+
