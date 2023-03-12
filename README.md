@@ -197,3 +197,4 @@ Learning React.js - Step by Step
 * [192-React_Router_6_8-PP-Controlling-Which-Data-Should-Be-Deferred](https://github.com/immanuala07/Learning-React/tree/192-React_Router_6_8-PP-Controlling-Which-Data-Should-Be-Deferred)
 * [193-React_Authentication-Initial_Project_Setup_And_Route_Setup](https://github.com/immanuala07/Learning-React/tree/193-React_Authentication-Initial_Project_Setup_And_Route_Setup)
 * [194-React_Router_6_8_In_React_Authentication-Working_with_Query_Parameters](https://github.com/immanuala07/Learning-React/tree/194-React_Router_6_8_In_React_Authentication-Working_with_Query_Parameters)
+* [195-React_Authentication-Implementing_the_Auth_Action](https://github.com/immanuala07/Learning-React/tree/195-React_Authentication-Implementing_the_Auth_Action)
