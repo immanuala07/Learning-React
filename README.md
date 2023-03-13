@@ -198,3 +198,4 @@ Learning React.js - Step by Step
 * [193-React_Authentication-Initial_Project_Setup_And_Route_Setup](https://github.com/immanuala07/Learning-React/tree/193-React_Authentication-Initial_Project_Setup_And_Route_Setup)
 * [194-React_Router_6_8_In_React_Authentication-Working_with_Query_Parameters](https://github.com/immanuala07/Learning-React/tree/194-React_Router_6_8_In_React_Authentication-Working_with_Query_Parameters)
 * [195-React_Authentication-Implementing_the_Auth_Action](https://github.com/immanuala07/Learning-React/tree/195-React_Authentication-Implementing_the_Auth_Action)
+* [196-React_Authentication-Validating-User-Input-And-Outputting-Validation-Errors](https://github.com/immanuala07/Learning-React/tree/196-React_Authentication-Validating-User-Input-And-Outputting-Validation-Errors)

@@ -56,6 +56,7 @@ export async function action ({ request }) {
 	});
 
 	if (response.status === 422 || response.status === 401) {
+		// The below response from this action method is captured or fetched from the useLoaderActon() in AuthForm.js
 		return response;
 	}
 
