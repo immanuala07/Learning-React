@@ -1,12 +1,1 @@
-{
-  "events": [
-    {
-      "title": "A new event",
-      "image": "https://cdn.muenchen-p.de/fl_progressive,q_65/.imaging/stk/responsive/teaser300/dms/va-2016/muenchner-christkindlmarkt/christkindlmarkt-marienplat-logo-hp/document/christkindlmarkt-marienplat-logo-hp.jpg",
-      "date": "2022-10-01",
-      "description": "Some awesome event!",
-      "id": "2a42fcc4-ea21-4bdd-abf6-c40006dc66a9"
-    }
-  ],
-  "users": []
-}
+{"events":[{"title":"Baby shower","image":"https://img.freepik.com/free-photo/closeup-dj-working-blue-light_181624-18773.jpg?w=2000","date":"2026-04-04","description":"Baby","id":"8b857231-a18a-49cd-8a76-e2eecda07cfd"},{"title":"Drive","image":"https://images.pexels.com/photos/4695098/pexels-photo-4695098.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1","date":"2024-01-01","description":"drive pic\n","id":"1cf11222-540f-41da-a624-035f265e2a32"},{"title":"Travel","image":"https://images.pexels.com/photos/614484/pexels-photo-614484.jpeg","date":"2023-03-25","description":"Travel","id":"3470b919-9995-4a36-ac1a-00f32ede3973"},{"title":"Function","image":"https://www.aapnoghar.com/wp-content/uploads/2019/09/Picture14.png","date":"2023-03-07","description":"Function","id":"2cfd8bae-4346-4579-9ce5-db7ce2a1d53f"},{"title":"DJ","image":"https://img.freepik.com/free-photo/closeup-dj-working-blue-light_181624-18773.jpg?w=2000","date":"2023-03-31","description":"Enjoy the Music","id":"2d8a5a0e-3215-45ae-8fef-fdec98e95710"},{"title":"Party","image":"https://cdn0.weddingwire.in/vendor/5061/3_2/640/jpeg/wedding-decoration-xplore-events-wedding-event-decor-8_15_365061-161665040711638.webp","date":"2023-04-06","description":"Let's rock the night!","id":"ee41e884-ff4d-4443-bec8-6dc22e9066b1"},{"id":"e1","title":"A dummy event","date":"2023-02-22","image":"https://blog.hubspot.de/hubfs/Germany/Blog_images/Optimize_Marketing%20Events%20DACH%202021.jpg","description":"Join this amazing event and connect with fellow developers."}],"users":[{"email":"imm@ab.com","password":"$2a$12$w8lCHz9WqS.Y92keDT0XWuTqO6W0tC3qcAFvIoSvDtT8QtHU9z24m","id":"0e817ad0-47bc-4ac0-bd89-be56a42f4b5b"}]}
