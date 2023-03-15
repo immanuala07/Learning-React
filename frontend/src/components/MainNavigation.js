@@ -31,18 +31,17 @@ function MainNavigation() {
               Events
             </NavLink>
           </li>
+          <li>
+            <NavLink
+              to="/newsletter"
+              className={({ isActive }) =>
+                isActive ? classes.active : undefined
+              }
+            >
+              Newsletter
+            </NavLink>
+          </li>
           {!token &&
-            <li>
-              <NavLink
-                to="/newsletter"
-                className={({ isActive }) =>
-                  isActive ? classes.active : undefined
-                }
-              >
-                Newsletter
-              </NavLink>
-            </li>}
-          {token &&
             <li>
               <NavLink
                 // Load login page by default
@@ -54,12 +53,12 @@ function MainNavigation() {
                 Authentication
               </NavLink>
             </li>}
-          <li>
+          {token && <li>
             {/* It is not important to have method prop in <Form> here */}
             <Form action="/logout" method="post">
               <button>Logout</button>
             </Form>
-          </li>
+          </li>}
         </ul>
       </nav>
       <NewsletterSignup />
