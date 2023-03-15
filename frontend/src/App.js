@@ -14,6 +14,7 @@ import RootLayout from './pages/Root';
 import { action as manipulateEventAction } from './components/EventForm';
 import NewsletterPage, { action as newsletterAction } from './pages/Newsletter';
 import AuthenticationPage, { action as authAction } from './pages/Authentication';
+import { action as logoutAction } from './pages/Logout';
 
 const router = createBrowserRouter([
   {
@@ -57,31 +58,36 @@ const router = createBrowserRouter([
       },
       {
         path: 'auth',
-				element: <AuthenticationPage />,
-				/*
-				The url to which the form will be submitted,
-				just like HTML form action.
-				
-				The only difference is the default action.
-				With HTML forms, it defaults to the full URL.
-				
-				With React Router <Form>,
-				it defaults to the relative URL of the closest route in context.
-				When the user submits the form,
-				React Router will match the action to the app's routes
-				and call the <Route action> with the serialized FormData.
-				
-				When the action completes,
-				all of the loader data on the page will automatically revalidate
-				to keep your UI in sync with your data.
-				*/
-				action: authAction
+        element: <AuthenticationPage />,
+        /*
+        The url to which the form will be submitted,
+        just like HTML form action.
+        
+        The only difference is the default action.
+        With HTML forms, it defaults to the full URL.
+        
+        With React Router <Form>,
+        it defaults to the relative URL of the closest route in context.
+        When the user submits the form,
+        React Router will match the action to the app's routes
+        and call the <Route action> with the serialized FormData.
+        
+        When the action completes,
+        all of the loader data on the page will automatically revalidate
+        to keep your UI in sync with your data.
+        */
+        action: authAction
       },
       {
         path: 'newsletter',
         element: <NewsletterPage />,
         action: newsletterAction,
       },
+      {
+        // For logout route we dont need the element property.
+        path: 'logout',
+        action: logoutAction
+      }
     ],
   },
 ]);
