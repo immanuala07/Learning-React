@@ -31,7 +31,7 @@ function RootLayout() {
       to reomve the token from the local storage.
       */
       submit(null, { action: '/logout', method: 'post' });
-    }, 1 * 60 * 60 * 1000)
+    }, 1 * 60 * 60 * 1000);
   }, [token, submit]);
 
   return (
