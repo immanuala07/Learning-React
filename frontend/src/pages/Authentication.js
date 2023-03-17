@@ -71,5 +71,9 @@ export async function action ({ request }) {
 	// Store the token from the backend to the local storage in browser
   localStorage.setItem('token', token);
 
+	const expiration = new Date();
+	expiration.setHours(expiration.getHours() + 1);
+	localStorage.setItem('expiration',expiration.toISOString());
+
 	return redirect('/');
 }

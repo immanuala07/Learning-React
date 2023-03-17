@@ -1,7 +1,8 @@
 import { useEffect } from 'react';
-import { Outlet, useLoaderData, useNavigation, useSubmit } from 'react-router-dom';
+import { Outlet, useLoaderData, useSubmit } from 'react-router-dom';
 
 import MainNavigation from '../components/MainNavigation';
+import { getTokenDuration } from '../util/auth';
 
 function RootLayout() {
   /*
@@ -25,13 +26,24 @@ function RootLayout() {
       return;
     }
 
+    if (token === 'EXPIRED') {
+      /*
+      Below code will invoke the action function of logout route
+      to reomve the token from the local storage.
+      */
+      submit(null, { action: '/logout', method: 'post' });
+      return;
+    }
+
+    const tokenDuration = getTokenDuration();
+
     setTimeout(() => {
       /*
       Below code will invoke the action function of logout route
       to reomve the token from the local storage.
       */
       submit(null, { action: '/logout', method: 'post' });
-    }, 1 * 60 * 60 * 1000);
+    }, tokenDuration);
   }, [token, submit]);
 
   return (
