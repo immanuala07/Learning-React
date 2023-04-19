@@ -72,22 +72,22 @@ The getServerSideProps function should return an object with any one of the foll
  3) redirect: The redirect object allows redirecting to internal and external resources.
     It should match the shape of { destination: string, permanent: boolean }.
 */
-export async function getServerSideProps (context) {
-  const request = context.req;
-  const response = context.res;
+// export async function getServerSideProps (context) {
+//   const request = context.req;
+//   const response = context.res;
 
-  // Check the below log on terminal
-  console.log(request);
-  console.log(response);
+//   // Check the below log on terminal
+//   console.log(request);
+//   console.log(response);
 
-  // fetch data from an API
+//   // fetch data from an API
 
-  return {
-    props: {
-      meetups: DUMMY_MEETUPS
-    }
-  }
-}
+//   return {
+//     props: {
+//       meetups: DUMMY_MEETUPS
+//     }
+//   }
+// }
 
 /*
 In NextJS, exporting a function called getStaticProps() will pre-render a page
@@ -119,13 +119,13 @@ followed by an optional revalidate property.
   4) revalidate: The revalidate property is the amount in seconds after which a page re-generation can occur
     (defaults to false or no revalidation).
 */
-// export async function getStaticProps () { 
-//   return {
-//     props: {
-//       meetups: DUMMY_MEETUPS
-//     },
-//     revalidate: 60
-//   }
-// }
+export async function getStaticProps () { 
+  return {
+    props: {
+      meetups: DUMMY_MEETUPS
+    },
+    revalidate: 60
+  }
+}
 
 export default HomePage;
