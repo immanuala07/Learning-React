@@ -1,6 +1,7 @@
 // our-domain.com/
 
 // import { useEffect, useState } from "react";
+import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
 
 const DUMMY_MEETUPS = [
@@ -120,11 +121,24 @@ followed by an optional revalidate property.
     (defaults to false or no revalidation).
 */
 export async function getStaticProps () { 
+  const client = await MongoClient.connect(
+    "mongodb+srv://immanuala07:vamps123@mongodbcluster0.lxtb5el.mongodb.net/meetups?retryWrites=true&w=majority"
+  );
+  const db = client.db();
+  const meetupsCollection = db.collection("meetups");
+  const meetups = await meetupsCollection.find().toArray();
+  client.close();
+
   return {
     props: {
-      meetups: DUMMY_MEETUPS
+      meetups: meetups.map((meetup) => ({
+        title:meetup.title,
+        address:meetup.address,
+        image:meetup.image,
+        id:meetup._id.toString()
+      }))
     },
-    revalidate: 60
+    revalidate: 1
   }
 }
 
