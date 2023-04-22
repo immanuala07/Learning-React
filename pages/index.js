@@ -1,8 +1,10 @@
 // our-domain.com/
 
 // import { useEffect, useState } from "react";
+import Head from "next/head";
 import { MongoClient } from "mongodb";
 import MeetupList from "../components/meetups/MeetupList";
+import { Fragment } from "react";
 
 const DUMMY_MEETUPS = [
 	{
@@ -30,7 +32,30 @@ function HomePage(props) {
   //   setLoadedMeetups(DUMMY_MEETUPS);
   // }, [])
 
-  return <MeetupList meetups={props.meetups} />;
+  return (
+    <Fragment>
+      {/*
+      The <Head> component is a built-in component provided by NextJS.
+      In Next.js, we can set the title, description, and other metadata for a page by using the <Head> component.
+      In Next.js, we can fetch data from a backend by using getStaticProps, getStaticPaths, or getServerSideProps
+      and use this data to set the page title and description
+
+      When it comes to SEO, the <Head> component plays an important role.
+      The <Head> component adds elements such as title, meta tags, charset, author, viewport settings, etc.
+      All these tags help to provide information about the website to Google.
+      Google ranks your website by using this information.
+      That is why the <Head> component is considered SEO friendly.
+      */}
+			<Head>
+				<title>React Meetups</title>
+				<meta
+					name='description'
+					content='Browse a huge list of highly active React meetups!'
+				/>
+			</Head>
+			<MeetupList meetups={props.meetups} />
+		</Fragment>
+  );
 }
 
 /*

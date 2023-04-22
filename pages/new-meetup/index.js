@@ -1,6 +1,8 @@
 // our-domain.com/new-meetup
 import { useRouter } from 'next/router';
 import NewMeetUpForm from '../../components/meetups/NewMeetupForm';
+import { Fragment } from 'react';
+import Head from 'next/head';
 
 function NewMeetUpPage () {
   /*
@@ -59,7 +61,30 @@ The API for router.replace is exactly the same as the API for router.push.
 		}
   }
 
-  return <NewMeetUpForm onAddMeetup={addMeetUpHandler} />
+  return (
+		<Fragment>
+			{/*
+      The <Head> component is a built-in component provided by NextJS.
+      In Next.js, we can set the title, description, and other metadata for a page by using the <Head> component.
+      In Next.js, we can fetch data from a backend by using getStaticProps, getStaticPaths, or getServerSideProps
+      and use this data to set the page title and description
+
+      When it comes to SEO, the <Head> component plays an important role.
+      The <Head> component adds elements such as title, meta tags, charset, author, viewport settings, etc.
+      All these tags help to provide information about the website to Google.
+      Google ranks your website by using this information.
+      That is why the <Head> component is considered SEO friendly.
+      */}
+			<Head>
+				<title>Add a New Meetup</title>
+				<meta
+					name="description"
+					content="Add your own meetups and create amazing networking opportunities."
+				/>
+			</Head>
+			<NewMeetUpForm onAddMeetup={addMeetUpHandler} />
+		</Fragment>
+  );
 }
 
 export default NewMeetUpPage;
