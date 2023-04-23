@@ -94,7 +94,27 @@ export async function getStaticPaths() {
 
   // Creating paths for dynamic routes  
 	return {
-		fallback: false,
+    /*
+    In getStaticPaths() we have a fallback property whose value are as below: 
+    fallback: false - If any new paths will result in a 404 page.
+    
+    fallback: true -  The paths returned from getStaticPaths will be rendered to HTML at build time by getStaticProps.
+                      The paths that have not been generated at build time will not result in a 404 page.
+                      When someone requests a page that is not generated yet,
+                      the user will see the page with a loading indicator or skeleton component.
+                      then, getStaticProps() finishes and the page will be rendered with the requested data.
+                      From now on, everyone who requests the same page will get the statically pre-rendered page.
+                      This ensures that users always have a fast experience while preserving fast builds and the benefits of Static Generation.
+
+                      [If any new path will be statically generated (getStaticProps is called), loading state is shown while generating page
+                      (via router.isFallback and showing fallback page), page is rendered with required props after generating,
+                      new path will be cached in CDN (later requests will result in cached page) and crawler Bots may index fallback page
+                      (not good for Seo)]
+
+    fallback: "blocking" -  New path will be waiting for HTML to be generated (via SSR), there will be no loading state (no fallback page)
+                            and new path will be cached in CDN (later requests will result in cached page)
+    */
+		fallback: "blocking",
 		// Creating paths for dynamic routes
 		paths: meetups.map((meetup) => ({
 			params: { meetupId: meetup._id.toString() }
