@@ -3,5 +3,6 @@
   "bracketSameLine": false,
   "trailingComma": "all",
   "bracketSpacing": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "singleAttributePerLine": true
 }
