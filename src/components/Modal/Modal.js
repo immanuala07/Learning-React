@@ -1,6 +1,10 @@
 import React from 'react';
 
 import './Modal.css';
+import { Transition } from 'react-transition-group';
+
+// Individually set the transition for appear, enter and exit of the component or html elements.
+const animationTiming = { enter: 400, exit: 1000 };
 
 const modal = (props) => {
 
@@ -41,7 +45,7 @@ const modal = (props) => {
     */
     <Transition
       in={props.show}
-      timeout={300}
+      timeout={animationTiming}
       mountOnEnter
       unmountOnExit
     >
