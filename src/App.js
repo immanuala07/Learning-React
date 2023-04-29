@@ -78,6 +78,24 @@ class App extends Component {
           timeout={1000}
           mountOnEnter
           unmountOnExit
+
+          // Callback fired before the "entering" status is applied. 
+          onEnter={() => console.log('onEnter')}
+          
+          // Callback fired after the "entering" status is applied.
+          onEntering={() => console.log('onEntering')}
+          
+          // Callback fired after the "entered" status is applied.
+          onEntered={() => console.log('onEntered')}
+          
+          // Callback fired before the "exiting" status is applied.
+          onExit={() => console.log('onExit')}
+          
+          // Callback fired after the "exiting" status is applied.
+          onExiting={() => console.log('onExiting')}
+          
+          // Callback fired after the "exited" status is applied.
+          onExited={() => console.log('onExited')}
         >
           {(state) => ( // states are of 4 stages, i.e; entering, entered, exiting & exited.
             <div
