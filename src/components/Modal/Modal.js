@@ -1,7 +1,7 @@
 import React from 'react';
 
 import './Modal.css';
-import { Transition } from 'react-transition-group';
+import { CSSTransition } from 'react-transition-group';
 
 // Individually set the transition for appear, enter and exit of the component or html elements.
 const animationTiming = { enter: 400, exit: 1000 };
@@ -11,70 +11,66 @@ const modal = (props) => {
   console.log(props.show); // entering, entered, exiting & exited
 
   return (
-    /*
-    The <Transition> component will describe a transition
-    from one component state to another over time with a simple declarative API.
-    Most commonly it's used to animate the mounting and unmounting of a component,
-    but can also be used to describe in-place transition states as well.
-    
-    It does not alter the behavior of the component it renders,
-    it only tracks "enter" and "exit" states for the components.
-    It's up to you to give meaning and effect to those states.
-    For example we can add styles to a component when it enters or exits.
+    /*    
+    CSSTransition applies a pair of class names during the appear, enter, and exit states of the transition.
+    The first class is applied and then a second *-active class in order to activate the CSS transition.
+    After the transition, matching *-done class names are applied to persist the transition state.
 
-    There are 4 main states a Transition can be in:
-      a) 'entering'
-      b) 'entered'
-      c) 'exiting'
-      d) 'exited'
+    When the in prop is set to true, the child component will first receive the class example-enter,
+    then the example-enter-active will be added in the next tick.
+    CSSTransition forces a reflow between before adding the example-enter-active.
+    This is an important trick because it allows us to transition between example-enter
+    and example-enter-active even though they were added immediately one after another.
+    Most notably, this is what makes it possible for us to animate appearance.
 
-    in - Transition state is toggled via the 'in' prop which shows the component; triggers the enter or exit states
-    When true the component begins the "Enter" stage. 
-    During this stage, the component will shift from its current transition state,
-    to 'entering' for the duration of the transition and then to the 'entered' stage once it's complete.
+      .my-node-enter {
+        opacity: 0;
+      }
 
-    timeout - The duration of the transition, in milliseconds. Required unless addEndListener is provided.
-      timeout: number | { enter?: number, exit?: number, appear?: number }
+      .my-node-enter-active {
+        opacity: 1;
+        transition: opacity 200ms;
+      }
 
-    mountOnEnter - By default the child component is mounted immediately along with the parent Transition component.
-      If you want to "lazy mount" the component on the first in={true} you can set mountOnEnter.
-      After the first enter transition the component will stay mounted, even on "exited", unless you also specify unmountOnExit.
+      .my-node-exit {
+        opacity: 1;
+      }
 
-    unmountOnExit - By default the child component stays mounted after it reaches the 'exited' state.
-      Set unmountOnExit if you'd prefer to unmount the component after it finishes exiting.
+      .my-node-exit-active {
+        opacity: 0;
+        transition: opacity 200ms;
+      }
+
+    *-active classes represent which styles you want to animate to,
+    so it's important to add transition declaration only to them,
+    otherwise transitions might not behave as intended! This might not be obvious when the transitions are symmetrical,
+    i.e. when *-enter-active is the same as *-exit,
+    like in the example above (minus transition), but it becomes apparent in more complex transitions.
+
+    Note: If you're using the appear prop, make sure to define styles for .appear-* classes as well.
     */
-    <Transition
+    <CSSTransition
       in={props.show}
       timeout={animationTiming}
       mountOnEnter
       unmountOnExit
+      /*
+      classNames get merged with different css classes defined based on the different states of CSS transiton
+      on the component or html element and these css classes are defined in global css or individual css file.
+      */
+      classNames='fade-slide'
     >
-      {(state) => {
-        const cssClasses = [
-          "Modal",
-          // states are of 4 stages, i.e; entering, entered, exiting & exited.
-          state === "entering"
-            ? "ModalOpen"
-            // states are of 4 stages, i.e; entering, entered, exiting & exited.
-            : state === "exiting"
-            ? "ModalClosed"
-            : null,
-        ];
-
-        return (
-          // JS join() returns an array as a string.
-          <div className={cssClasses.join(" ")}>
-            <h1>A Modal</h1>
-            <button
-              className="Button"
-              onClick={props.closed}
-            >
-              Dismiss
-            </button>
-          </div>
-        );
-      }}
-    </Transition>
+      {/* JS join() returns an array as a string. */}
+      <div className='Modal'>
+        <h1>A Modal</h1>
+        <button
+          className="Button"
+          onClick={props.closed}
+        >
+          Dismiss
+        </button>
+      </div>
+    </CSSTransition>
   );
 };
 
