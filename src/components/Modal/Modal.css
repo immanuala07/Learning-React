@@ -24,34 +24,36 @@
 /*
 classNames get merged with different css classes defined based on the different states of CSS transiton
 on the component or html element and these css classes are defined in global css or individual css file.
-*/
-.fade-slide-enter {
 
+.fade-slide-enter {
 }
+*/
 
 /*
 classNames get merged with different css classes defined based on the different states of CSS transiton
 on the component or html element and these css classes are defined in global css or individual css file.
-*/
+
 .fade-slide-enter-active {
   animation: openModal 0.4s ease-out forwards;
 }
+*/
 
 /*
 classNames get merged with different css classes defined based on the different states of CSS transiton
 on the component or html element and these css classes are defined in global css or individual css file.
-*/
+
 .fade-slide-exit {
-
 }
+*/
 
 /*
 classNames get merged with different css classes defined based on the different states of CSS transiton
 on the component or html element and these css classes are defined in global css or individual css file.
-*/
+
 .fade-slide-exit-active {
   animation: closeModal 1s ease-out forwards;
 }
+*/
 
 @keyframes openModal {
   0% {

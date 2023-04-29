@@ -55,10 +55,20 @@ const modal = (props) => {
       mountOnEnter
       unmountOnExit
       /*
-      classNames get merged with different css classes defined based on the different states of CSS transiton
-      on the component or html element and these css classes are defined in global css or individual css file.
+      The animation classNames applied to the component as it appears, enters, exits or has finished the transition.
+      Each individual classNames can also be specified independently like below adding the desired css classes.      
       */
-      classNames='fade-slide'
+      classNames={{
+        enter: '',
+        enterActive: 'ModalOpen',
+        appearDone:'',
+        exit: '',
+        exitActive: 'ModalClosed',
+        exitDone:'',
+        appear: '',
+        appearActive: '',
+        appearDone:''
+      }}
     >
       {/* JS join() returns an array as a string. */}
       <div className='Modal'>
