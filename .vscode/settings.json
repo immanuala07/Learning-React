@@ -1,0 +1,11 @@
+{
+  "editor.formatOnPaste": false,
+  "editor.formatOnType": true,
+  "editor.formatOnSaveMode": "modifications",
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "[javascript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "editor.insertSpaces": true,
+  "editor.formatOnSave": false
+}
