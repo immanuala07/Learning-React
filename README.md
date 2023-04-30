@@ -767,7 +767,7 @@ Import required React Bootstrap components within ```src/App.js``` file or your 
 
 ```js
 import { Navbar, Jumbotron, Button } from 'react-bootstrap';
-```
+``` 
 
 Now you are ready to use the imported React Bootstrap components within your component hierarchy defined in the render method. Here is an example [`App.js`](https://gist.githubusercontent.com/gaearon/85d8c067f6af1e56277c82d19fd4da7b/raw/6158dd991b67284e9fc8d70b9d973efe87659d72/App.js) redone using React Bootstrap.
 
