@@ -105,7 +105,7 @@ This approach will keep our components lean, to not have too much logic in them.
 And by moving that logic to this action creator function,
 we did achieved this.
 */
-export const sendCartData = (cart) => {
+export const sendCartData = (cart) => { // Action Creator Thunk
     return async (dispatch) => {
         // Dispatch action with action creator
         dispatch(uiActions.showNotification({
