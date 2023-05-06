@@ -3,6 +3,7 @@ import React, { useState } from "react";
 export const ProductsContext = React.createContext({
   // Setting the default value for React context
   products: [],
+  toggleFav: (id) => {},
 });
 
 // Creating and exporting the component
@@ -36,9 +37,25 @@ export default (props) => { // eslint-disable-line import/no-anonymous-default-e
     }
   ]);
 
+  const toggleFavourite = (productId) => {
+    // Using callback function declared in usestate to use the previous value or the current product list
+    setProductsList((currentProdList) => {
+      const prodIndex = currentProdList.findIndex((p) => p.id === productId);
+      const newFavStatus = !currentProdList[prodIndex].isFavorite;
+      const updatedProducts = [...currentProdList];
+      updatedProducts[prodIndex] = {
+        ...currentProdList[prodIndex],
+        isFavorite: newFavStatus,
+      };
+      return updatedProducts
+    });
+  };
+
   return (
-    // Setting the state value to React context by using the React Context Provider
-    <ProductsContext.Provider value={{ products: productList }}>
+    // Setting the state value and function to React context by using the React Context Provider
+    <ProductsContext.Provider
+      value={{ products: productList, toggleFav: toggleFavourite }}
+    >
       {/* Below children is used to wrap the other components */}
       {props.children}
     </ProductsContext.Provider>
