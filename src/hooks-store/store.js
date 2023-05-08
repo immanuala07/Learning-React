@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 
 let globalState = {};
 let listeners = [];
@@ -19,7 +19,7 @@ Each component would get it's own data.
 But managing it outside of the hook every file imports
 this file or something from that file gets the same shared data.
 */
-export const useStore = () => {
+export const useStore = (shouldListen=true) => {
   /*
   useState allows us to manage a state and whenever we update that state
   any component that uses useState will re render.
@@ -40,13 +40,17 @@ export const useStore = () => {
   };
 
   useEffect(() => {
-    listeners.push(setState);
+    if (shouldListen) {
+      listeners.push(setState);
+    }
 
     return () => {
-      // run the cleanup function to remove the listener when the component unmounts or removed
-      listeners = listeners.filter((li) => li !== setState);
+      if (shouldListen) {
+        // run the cleanup function to remove the listener when the component unmounts or removed
+        listeners = listeners.filter((li) => li !== setState);
+      }
     };
-  }, [setState]);
+  }, [setState,shouldListen]);
   
   return [globalState, dispatch];
 };
