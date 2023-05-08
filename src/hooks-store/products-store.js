@@ -13,6 +13,7 @@ const configureStore = () => {
       return { products: updatedProducts };
     },
   };
+  
   initStore(actions, {
     products: [
       {

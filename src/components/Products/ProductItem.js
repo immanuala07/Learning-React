@@ -1,17 +1,17 @@
-import React, { useContext } from 'react';
+import React from 'react';
 
 import Card from '../UI/Card';
 import './ProductItem.css';
-import { ProductsContext } from '../../context/products-context';
+import { useStore } from '../../hooks-store/store';
 
 const ProductItem = props => {
-  // Fetching the toggleFav function defined in the context (products-context.js)
-  const toggleFav = useContext(ProductsContext).toggleFav;
+  // Acessing the updating function
+  const dispatch = useStore()[1];
 
   const toggleFavHandler = () => {
     console.log("Button clicked for toggleFavHandler!");
-    // Calling the function defined in the context
-    toggleFav(props.id);
+    // Dispatching action creator from the custom store
+    dispatch('TOGGLE_FAV', props.id);
   };
 
   return (
