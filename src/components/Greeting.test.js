@@ -18,7 +18,8 @@ describe("Greeting component", () => {
   });
 
   test('renders "good to see you" if the button was NOT clicked', () => {
-    render(<Greeting />);
+    // Arrange
+    render(<Greeting />); // Rendering greeting component which renders this entire component tree including the child components.
 
     // Checking with not so strict
     const outputElement = screen.getByText("good to see you", {
@@ -32,7 +33,7 @@ describe("Greeting component", () => {
 
   test('renders "Changed!" if the button was clicked', () => {
     // Arrange
-    render(<Greeting />);
+    render(<Greeting />); // Rendering greeting component which renders this entire component tree including the child components.
 
     // Act
     const buttonElement = screen.getByRole("button");
@@ -45,7 +46,7 @@ describe("Greeting component", () => {
 
   test('doesnt renders "good to see you" if the button was clicked', () => {
     // Arrange
-    render(<Greeting />);
+    render(<Greeting />); // Rendering greeting component which renders this entire component tree including the child components.
 
     // Act
     const buttonElement = screen.getByRole("button");
