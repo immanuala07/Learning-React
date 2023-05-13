@@ -1,0 +1,20 @@
+{
+  "name": "learning-react",
+  "version": "1.0.0",
+  "description": "Learning React.js - Step by Step",
+  "main": "no-typescript.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/immanuala07/Learning-React.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/immanuala07/Learning-React/issues"
+  },
+  "homepage": "https://github.com/immanuala07/Learning-React#readme"
+}
