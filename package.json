@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "Learning React.js - Step by Step",
   "main": "no-typescript.js",
+  "dependencies": {
+    "typescript": "^5.0.4"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
