@@ -25,3 +25,17 @@ people = [
         age: 32,
     }
 ];
+var abc;
+// Union type
+var a;
+a = 'abc';
+a = 1234;
+// Union type
+var x;
+x = [1, 4, 7];
+x = 7;
+var carYear = 2001;
+var carType = "Toyota";
+var carModel = "Corolla";
+var car;
+var carArray;
