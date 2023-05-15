@@ -39,3 +39,13 @@ people = [
 ];
 
 let abc: any;
+
+// Union type
+let a: (string | number);
+a = 'abc';
+a = 1234;
+
+// Union type
+let x: (number | number[]);
+x = [1, 4, 7];
+x = 7;
