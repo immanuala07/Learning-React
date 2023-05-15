@@ -49,3 +49,19 @@ a = 1234;
 let x: (number | number[]);
 x = [1, 4, 7];
 x = 7;
+
+// Type Aliases
+type CarYear = number;
+type CarType = string;
+type CarModel = string;
+type Car = {
+  year: CarYear;
+  type: CarType;
+  model: CarModel;
+};
+
+let carYear: CarYear = 2001;
+let carType: CarType = "Toyota";
+let carModel: CarModel = "Corolla";
+let car: Car;
+let carArray: Car[];
