@@ -65,3 +65,16 @@ let carType: CarType = "Toyota";
 let carModel: CarModel = "Corolla";
 let car: Car;
 let carArray: Car[];
+
+// Functions & types
+function sum (a: number, b: number): number {
+  return a + b;
+}
+
+function add (a: number, b: number) {
+  return a + b;
+}
+
+function print (value: any) {
+  console.log(value);
+}
