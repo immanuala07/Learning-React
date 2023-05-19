@@ -1,10 +1,18 @@
 import './App.css';
 import Todos from './components/Todos';
+import Todo from './models/Todo';
 
-function App() {
+function App () {
+  const todos = [
+    new Todo("Learn React"),
+    new Todo("Learn Redux"),
+    new Todo("Learn TypeScript")
+  ];
+
   return (
     <div>
-      <Todos items={['Learn React', 'Learn Redux', 'Learn TypeScript']} />
+      {/* Passing an array of Todo class objects */}
+      <Todos items={todos} />
     </div>
   );
 }
