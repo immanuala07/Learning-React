@@ -1,4 +1,5 @@
 import Todo from "../models/Todo";
+import TodoItem from "./TodoItem";
 
 /*
 By using React.FC, we are merging which ever object we are defining here,
@@ -10,8 +11,13 @@ const Todos: React.FC<{ items: Todo[] }> = (props) => {
   return (
     <ul>
       {props.items.map((item) => (
-        // Accesing the properties from Todo class.
-        <li key={item.id}>{item.text}</li>
+        /*
+        Accesing the properties from Todo class.
+        
+        If in case, the TodoItem is using React.FC then we dont need to pass key on the React.FC,
+        because it is internally taken care about that
+        */
+        <TodoItem key={item.id} text={item.text} />
       ))}
     </ul>
   );
