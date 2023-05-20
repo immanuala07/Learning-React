@@ -1,5 +1,6 @@
 import Todo from "../models/Todo";
 import TodoItem from "./TodoItem";
+import classes from "./Todos.module.css";
 
 /*
 By using React.FC, we are merging which ever object we are defining here,
@@ -9,7 +10,7 @@ Within the React.FC we are providing the items props with type anotation of Todo
 */
 const Todos: React.FC<{ items: Todo[] }> = (props) => {
   return (
-    <ul>
+    <ul className={classes.todos}>
       {props.items.map((item) => (
         /*
         Accesing the properties from Todo class.
