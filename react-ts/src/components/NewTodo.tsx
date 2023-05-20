@@ -1,6 +1,8 @@
 import { useRef } from "react";
 
-const NewTodo = () => {
+// Adding TypeScript generic with prop that has function
+// When a prop has a function we define a function with parameter and return value in the TypeScript generics.
+const NewTodo: React.FC<{ onAddTodo: (text: string) => void }> = (props) => {
   /*
   Below we are letting know the typescript that useRef returns HTMLInputElement
   and setting the intial value for useRef as null.
@@ -25,6 +27,9 @@ const NewTodo = () => {
       // throw an error
       return;
     }
+
+    // Calling the function from the parent component
+    props.onAddTodo(enteredText);
   };
 
   return (
