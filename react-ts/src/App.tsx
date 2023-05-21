@@ -23,11 +23,18 @@ function App () {
     })
   };
 
+  const removeTodoHandler = (todoId: string) => {
+    setTodos((prevTodos) => {
+      // Removing a todo
+      return prevTodos.filter((todo) => todo.id !== todoId);
+    });
+  };
+
   return (
     <div>
       <NewTodo onAddTodo={addTodoHandler} />
       {/* Passing an array of Todo class objects */}
-      <Todos items={todos} />
+      <Todos items={todos} onRemoveTodo={removeTodoHandler} />
     </div>
   );
 }
