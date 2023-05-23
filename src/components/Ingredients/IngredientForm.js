@@ -4,7 +4,7 @@ import Card from '../UI/Card';
 import './IngredientForm.css';
 
 const IngredientForm = React.memo(props => {
-  const inputState = useState({ title: "", amount: "" });
+  const [inputState, setInputState] = useState({ title: "", amount: "" });
 
   const submitHandler = event => {
     event.preventDefault();
@@ -20,14 +20,14 @@ const IngredientForm = React.memo(props => {
             <input
               type="text"
               id="title"
-              value={inputState[0].title}
+              value={inputState.title}
               onChange={(event) => {
                 // Due to closure we define the newTitle
                 const newTitle = event.target.value;
-                inputState[1]((prevInputState) => ({
+                setInputState((prevInputState) => ({
                   // Accessing the newTitle variable
                   title: newTitle,
-                  amount: prevInputState.amount
+                  amount: prevInputState.amount,
                 }));
               }}
             />
@@ -37,11 +37,11 @@ const IngredientForm = React.memo(props => {
             <input
               type="number"
               id="amount"
-              value={inputState[0].amount}
+              value={inputState.amount}
               onChange={(event) => {
                 // Due to closure we define the newAmount
                 const newAmount = event.target.value;
-                inputState[1]((prevInputState) => ({
+                setInputState((prevInputState) => ({
                   // Accessing the newTitle variable
                   amount: newAmount,
                   title: prevInputState.title,
