@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useState } from "react";
 
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
@@ -6,30 +6,6 @@ import Search from "./Search";
 
 function Ingredients() {
   const [userIngredients, setUserIngredients] = useState([]);
-
-  useEffect(() => {
-    fetch("https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json")
-      .then((response) => response.json())
-      .then((responseData) => {
-        /*
-        JavaScript loops: JavaScript supports different kinds of loops:
-        *) for - loops through a block of code a number of times.
-        *) for/in - loops through the properties of an object.
-        *) for/of - loops through the values of an iterable object.
-        *) while - loops through a block of code while a specified condition is true.
-        *) do/while - also loops through a block of code while a specified condition is true.
-        */
-        const loadedIngreditent = [];
-        for (const key in responseData) {
-          loadedIngreditent.push({
-            id: key,
-            title: responseData[key].title,
-            amount: responseData[key].amount
-          });
-        }
-        setUserIngredients(loadedIngreditent);
-      });
-  }, []);
 
   const addIngredientHandler = (ingredient) => {
     fetch("https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json", {
@@ -65,12 +41,17 @@ function Ingredients() {
     );
   };
 
+  const filteredIngredientsHandler = useCallback(filteredIngredients => {
+    setUserIngredients(filteredIngredients);
+    // Since setUserIngredients is usestate updating function so it wont changes so we will not add it as dependency
+  }, []);
+
   return (
     <div className="App">
       <IngredientForm onAddIngredient={addIngredientHandler} />
 
       <section>
-        <Search />
+        <Search onLoadIngredients={filteredIngredientsHandler} />
         <IngredientList
           ingredients={userIngredients}
           onRemoveItem={removeIngredientHandler}
