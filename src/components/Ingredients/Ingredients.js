@@ -35,10 +35,17 @@ function Ingredients() {
     */
     
     // or
-      
-    setUserIngredients((prevIngredients) =>
-      prevIngredients.filter((ingredient) => id !== ingredient.id),
-    );
+
+    fetch(
+      `https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project/${id}.json`,
+      {
+        method: "DELETE",
+      },
+    ).then((response) => {
+      setUserIngredients((prevIngredients) =>
+        prevIngredients.filter((ingredient) => id !== ingredient.id),
+      );
+    });
   };
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
