@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 
 import Card from '../UI/Card';
+import ErrorModal from '../UI/ErrorModal';
+import useHttp  from '../hooks/http';
 import './Search.css';
 
 const Search = React.memo(props => {
@@ -9,6 +11,14 @@ const Search = React.memo(props => {
   const { onLoadIngredients } = props;
 
   const inputRef = useRef();
+
+  const {
+    isLoading,
+    data,
+    error,
+    sendRequest,
+    clear,
+  } = useHttp();
 
   // Below useeffect is going to run when the initially page is loaded and when the dependency value changes
   useEffect(() => {
@@ -21,37 +31,18 @@ const Search = React.memo(props => {
             : `?orderBy="title"&equalTo="${enteredFilter}"`;
 
         /*
-    Add the below entry to the firebase rules after the read and write entry:
+        Add the below entry to the firebase rules after the read and write entry:
 
-    "<firebase-db-name>":{
-      ".indexOn": ["title"]
-    }
-    */
-
-        fetch(
-          "https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json" +
-            query,
-        )
-          .then((response) => response.json())
-          .then((responseData) => {
-            /*
-        JavaScript loops: JavaScript supports different kinds of loops:
-        *) for - loops through a block of code a number of times.
-        *) for/in - loops through the properties of an object.
-        *) for/of - loops through the values of an iterable object.
-        *) while - loops through a block of code while a specified condition is true.
-        *) do/while - also loops through a block of code while a specified condition is true.
+        "<firebase-db-name>":{
+          ".indexOn": ["title"]
+        }
         */
-            const loadedIngredients = [];
-            for (const key in responseData) {
-              loadedIngredients.push({
-                id: key,
-                title: responseData[key].title,
-                amount: responseData[key].amount,
-              });
-            }
-            onLoadIngredients(loadedIngredients);
-          });
+
+       sendRequest(
+         "https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json" +
+           query,
+         "GET",
+       );
       }
     }, 500);
 
@@ -63,13 +54,29 @@ const Search = React.memo(props => {
     If we have [] as dependencies (i.e. the effect only runs once),
     the cleanup functio runs when the component gets unmounted.
     */
-  }, [enteredFilter, onLoadIngredients]);
+  }, [enteredFilter, inputRef, sendRequest]);
+
+  useEffect(() => {
+    if (!isLoading && !error && data) {
+      const loadedIngredients = [];
+      for (const key in data) {
+        loadedIngredients.push({
+          id: key,
+          title: data[key].title,
+          amount: data[key].amount,
+        });
+      }
+      onLoadIngredients(loadedIngredients);
+    }
+  }, [data, isLoading, error, onLoadIngredients]);
 
   return (
     <section className="search">
+      {error && <ErrorModal onClose={clear} >{error}</ErrorModal>}
       <Card>
         <div className="search-input">
           <label>Filter by Title</label>
+          {isLoading && <span>Loading...</span>}
           <input
             ref = {inputRef}
             type="text"
