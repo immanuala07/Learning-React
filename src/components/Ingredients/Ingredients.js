@@ -4,6 +4,7 @@ import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
 import ErrorModal from "../UI/ErrorModal";
 import Search from "./Search";
+import useHttp from "../hooks/http";
 
 const IngredientReducer = (currentIngredient, action) => {
   switch (action.type) {
@@ -18,64 +19,44 @@ const IngredientReducer = (currentIngredient, action) => {
   }
 };
 
-const httpReducer = (curHttpState, action) => {
-  switch (action.type) {
-    case "SEND":
-      return { loading: true, error: null };
-    case "RESPONSE":
-      return { ...curHttpState, loading: false };
-    case "ERROR":
-      return { loading: false, error: action.errorMessage };
-    case "CLEAR":
-      return { ...curHttpState, error: null };
-    default:
-      throw new Error("Should not be reached!");
-  }
-};
-
 function Ingredients() {
   const [userIngredients, dispatch] = useReducer(IngredientReducer, []);
-  const [httpState, dispatchHttp] = useReducer(httpReducer, {
-    loading: false,
-    error: null,
-  });
+  const { isLoading, data, error, sendRequest } = useHttp();
 
   const addIngredientHandler = useCallback((ingredient) => {
-    dispatchHttp({ type: "SEND" });
+    // dispatchHttp({ type: "SEND" });
     fetch("https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json", {
       method: 'POST',
       body: JSON.stringify(ingredient),
       headers: { 'Content-Type': 'application/json' }
     }).then((response) => {
-      dispatchHttp({ type: "RESPONSE" });
+      // dispatchHttp({ type: "RESPONSE" });
       return response.json();
     }).then((responseData) => {
-      dispatch({
-        type: "ADD",
-        ingredient: {
-          id: responseData.name,
-          ...ingredient,
-        },
-      });
+
+      console.log(responseData);
+
+      // dispatch({
+      //   type: "ADD",
+      //   ingredient: {
+      //     id: responseData.name,
+      //     ...ingredient,
+      //   },
+      // });
     });    
   }, []);
 
-  const removeIngredientHandler = useCallback((ingredientId) => {
-    dispatchHttp({ type: "SEND" });
-    fetch(
-      `https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project/${ingredientId}.jsn`,
-      {
-        method: "DELETE",
-      },
-    )
-      .then((response) => {
-        dispatchHttp({ type: "RESPONSE" });
-        dispatch({ type: "DELETE", id: ingredientId });
-      })
-      .catch((error) => {
-        dispatchHttp({ type: "ERROR", errorMessage: "Somthing went wrong !" });
-      });
-  }, []);
+  const removeIngredientHandler = useCallback(
+    (ingredientId) => {
+      sendRequest(
+        `https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project/${ingredientId}.json`,
+        "DELETE",
+      );
+
+      // dispatchHttp({ type: "SEND" });
+    },
+    [sendRequest],
+  );
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     dispatch({ type: "SET", ingredient: filteredIngredients });
@@ -83,7 +64,7 @@ function Ingredients() {
   }, []);
 
   const clearError = useCallback(() => {
-    dispatchHttp({ type: "CLEAR" });
+    // dispatchHttp({ type: "CLEAR" });
   });
 
   const ingredientList = useMemo(() => {
@@ -97,13 +78,13 @@ function Ingredients() {
 
   return (
     <div className="App">
-      {httpState.error && <ErrorModal onClose={clearError} >{httpState.error}</ErrorModal>}
+      {error && <ErrorModal onClose={clearError} >{error}</ErrorModal>}
 
-      <IngredientForm onAddIngredient={addIngredientHandler} loading={httpState.loading} />
+      <IngredientForm onAddIngredient={addIngredientHandler} loading={isLoading} />
 
       <section>
         <Search onLoadIngredients={filteredIngredientsHandler} />
-        
+        {ingredientList}
       </section>
     </div>
   );
