@@ -1,4 +1,4 @@
-import React, { useReducer, useCallback, useMemo } from "react";
+import React, { useReducer, useCallback, useMemo, useEffect } from "react";
 
 import IngredientForm from "./IngredientForm";
 import IngredientList from "./IngredientList";
@@ -21,42 +21,45 @@ const IngredientReducer = (currentIngredient, action) => {
 
 function Ingredients() {
   const [userIngredients, dispatch] = useReducer(IngredientReducer, []);
-  const { isLoading, data, error, sendRequest } = useHttp();
+  const { isLoading, data, error, reqExtra, sendRequest, reqIdentifier } = useHttp();
+
+  useEffect(() => {
+    if (!isLoading && !error && reqIdentifier === 'REMOVE_INGREDIENT') {
+      dispatch({ type: "DELETE", id: reqExtra });
+    } else if (!isLoading && !error && reqIdentifier === 'ADD_INGREDIENT') {
+      dispatch({
+        type: "ADD",
+        ingredient: {
+          id: data.name,
+          ...reqExtra,
+        },
+      });
+    }
+  }, [data, reqExtra, reqIdentifier]);
 
   const addIngredientHandler = useCallback((ingredient) => {
-    // dispatchHttp({ type: "SEND" });
-    fetch("https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json", {
-      method: 'POST',
-      body: JSON.stringify(ingredient),
-      headers: { 'Content-Type': 'application/json' }
-    }).then((response) => {
-      // dispatchHttp({ type: "RESPONSE" });
-      return response.json();
-    }).then((responseData) => {
-
-      console.log(responseData);
-
-      // dispatch({
-      //   type: "ADD",
-      //   ingredient: {
-      //     id: responseData.name,
-      //     ...ingredient,
-      //   },
-      // });
-    });    
-  }, []);
+    sendRequest(
+      "https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project.json",
+      "POST",
+      JSON.stringify(ingredient),
+      ingredient,
+      'ADD_INGREDIENT'
+    );
+  }, [sendRequest]);
 
   const removeIngredientHandler = useCallback(
     (ingredientId) => {
       sendRequest(
         `https://fir-project-a6274-default-rtdb.firebaseio.com/Demo-project/${ingredientId}.json`,
         "DELETE",
+        null,
+        ingredientId,
+        'REMOVE_INGREDIENT'
       );
-
-      // dispatchHttp({ type: "SEND" });
     },
     [sendRequest],
   );
+
 
   const filteredIngredientsHandler = useCallback(filteredIngredients => {
     dispatch({ type: "SET", ingredient: filteredIngredients });
