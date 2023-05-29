@@ -1,32 +1,27 @@
 import PostsList from "./components/PostsList";
-
-// const DUMMY_LISTS = [
-//   { author: "Immanual", body: "React.js is awesome!" },
-//   { author: "Imman", body: "React.js is awesome!" },
-// ];
+import MainHeader from "./components/MainHeader";
+import { useState } from "react";
 
 function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
+
+  const showModalHandler = () => {
+    console.log("In showModalHandler()");
+    setModalIsVisible(true);
+  };
+
+  const hideModalHandler = () => {
+    setModalIsVisible(false);
+  };
+
+  console.log("App.js : ",modalIsVisible);
+  
   return (
     <>
-      {/* <main>
-        <Post
-          author="Immanual"
-          body="React.js is awesome!"
-        />
-        <Post
-          author="Imman"
-          body="Check out the full course!"
-        />
+      <MainHeader onCreatePost={showModalHandler} />
+      <main>
+        <PostsList isPosting={modalIsVisible} onStopPosting={hideModalHandler} />
       </main>
-      <ul>
-        {DUMMY_LISTS.map((listItem) => (
-          <Post
-            title={listItem.author}
-            body={listItem.body}
-          />
-        ))}
-      </ul> */}
-      <PostsList />
     </>
   );
 }
