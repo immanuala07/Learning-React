@@ -1,13 +1,11 @@
 import Post from './Post.jsx';
+import NewPost from './NewPost.jsx';
 import classes from "./PostsList.module.css";
 
 function PostsList(props) {
   return (
-    // <li className={classes.posts}>
-    //   dsdsds
-    //   <p>{props.title}</p>
-    //   <p>{props.body}</p>
-    // </li>
+    <>
+    <NewPost/>
     <ul className={classes.posts}>
       <Post
         author="Immanual"
@@ -18,6 +16,7 @@ function PostsList(props) {
         body="Check out the full course!"
       />
     </ul>
+    </>
   );
 }
 
