@@ -16,8 +16,6 @@ function PostsList ({isPosting, onStopPosting}) {
     setEnteredAuthor(event.target.value);
   };
 
-  console.log(isPosting);
-
   return (
     <>
       {isPosting && (
@@ -25,6 +23,7 @@ function PostsList ({isPosting, onStopPosting}) {
           <NewPost
             onBodyChange={bodyChangeHandler}
             onAuthorChange={authorChangeHandler}
+            onCancel={onStopPosting}
           />
         </Modal>
       )}
