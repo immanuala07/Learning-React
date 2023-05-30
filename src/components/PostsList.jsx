@@ -5,24 +5,12 @@ import Modal from './Modal.jsx';
 import { useState } from 'react';
 
 function PostsList ({isPosting, onStopPosting}) {
-  const [enteredBody, setEnteredBody] = useState("");
-  const [enteredAuthor, setEnteredAuthor] = useState("");
-
-  const bodyChangeHandler = (event) => {
-    setEnteredBody(event.target.value);
-  };
-
-  const authorChangeHandler = (event) => {
-    setEnteredAuthor(event.target.value);
-  };
-
+  
   return (
     <>
       {isPosting && (
         <Modal onClose={onStopPosting}>
           <NewPost
-            onBodyChange={bodyChangeHandler}
-            onAuthorChange={authorChangeHandler}
             onCancel={onStopPosting}
           />
         </Modal>

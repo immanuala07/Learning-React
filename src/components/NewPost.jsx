@@ -13,15 +13,28 @@ function NewPost (props) {
     setEnteredAuthor(event.target.value);
   };
 
+  const submitHandler = (event) => {
+    event.preventDefault();
+    const postData = {
+      body: enteredBody,
+      author: enteredAuthor
+    };
+    console.log(postData);
+    onCancel();
+  };
+
   return (
-    <form className={classes.form}>
+    <form
+      className={classes.form}
+      onSubmit={submitHandler}
+    >
       <p>
         <label htmlFor="body">Text</label>
         <textarea
           id="body"
           required
           rows={3}
-          onChange={props.onBodyChange}
+          onChange={bodyChangeHandler}
         />
       </p>
       <p>
@@ -30,7 +43,7 @@ function NewPost (props) {
           type="text"
           id="name"
           required
-          onChange={props.onAuthorChange}
+          onChange={authorChangeHandler}
         />
       </p>
       <div className={classes.actions}>
