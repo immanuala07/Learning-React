@@ -6,15 +6,12 @@ function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
 
   const showModalHandler = () => {
-    console.log("In showModalHandler()");
     setModalIsVisible(true);
   };
 
   const hideModalHandler = () => {
     setModalIsVisible(false);
   };
-
-  console.log("App.js : ",modalIsVisible);
   
   return (
     <>
