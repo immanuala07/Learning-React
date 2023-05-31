@@ -1,8 +1,8 @@
-## Learning React.js
+# Learning React.js
 
 Navigate to below branches to understand about React:
 
-### <details>
+<details>
 <summary>Learn React.js - Step by Step</summary>
 
 - [1-Get-Started](https://github.com/immanuala07/Learning-React/tree/1-Get-Started)
