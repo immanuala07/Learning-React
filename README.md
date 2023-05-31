@@ -274,3 +274,13 @@ Navigate to below branches to understand about React:
 - [267-Demo_Project_using_Vite_And_React_To_Understand_React_Core_Features](https://github.com/immanuala07/Learning-React/tree/267-Demo_Project_using_Vite_And_React_To_Understand_React_Core_Features)
 
 </details>
+
+<br/>
+
+#### Useful links:
+
+- [React](https://legacy.reactjs.org/)
+- [React Redux](https://react-redux.js.org/)
+- [Redux Toolkit](https://redux-toolkit.js.org/)
+- [React Router](https://reactrouter.com/en/main)
+- [Next.js](https://nextjs.org/)
