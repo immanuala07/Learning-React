@@ -275,8 +275,6 @@ Navigate to below branches to understand about React:
 
 </details>
 
-<br/>
-
 #### Useful links:
 
 - [React](https://legacy.reactjs.org/)
