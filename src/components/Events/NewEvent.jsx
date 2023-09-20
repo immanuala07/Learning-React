@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Modal from '../UI/Modal.jsx';
 import EventForm from './EventForm.jsx';
 import { useMutation } from '@tanstack/react-query';
-import { createNewEvent } from '../../util/http.js';
+import { createNewEvent, queryClient } from '../../util/http.js';
 import ErrorBlock from '../UI/ErrorBlock.jsx';
 
 export default function NewEvent() {
@@ -26,6 +26,23 @@ export default function NewEvent() {
    */
   const { mutate, isPending, isError, error } = useMutation({
     mutationFn: createNewEvent,
+    /**
+     * The below function will fire when the mutation is successful and will be passed the mutation's result.
+     * If a promise is returned, it will be awaited and resolved before proceeding
+     */
+    onSuccess: () => {
+      /**
+       * By using the below statement,
+       * it tells React Query that the data fetched by certain queries is outdated now,
+       * and it should be marked as stale so that an immediate refetch should be triggered,
+       * if the Query belongs to a component that's currently visible on the screen.
+       * 
+       * invalidateQueries takes an object as a parameter where we define the Query key to target in the same way as it is used in queries.
+       * Note: Query key doesn't have to be exactly the same key. So, all the queries with that key pattern will be invalidated and immediately refetch/queries will be triggered.
+       */
+      queryClient.invalidateQueries({ queryKey: ["events"] });
+      navigate("/events");
+    },
   });
 
   function handleSubmit(formData) {

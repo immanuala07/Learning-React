@@ -50,7 +50,7 @@ export default function EventForm({ inputData, onSubmit, children }) {
       {data && (
         <div className="control">
           <ImagePicker
-            images={[]}
+            images={data}
             onSelect={handleSelectImage}
             selectedImage={selectedImage}
           />
