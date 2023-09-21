@@ -32,7 +32,10 @@ export default function EventDetails() {
        * invalidateQueries takes an object as a parameter where we define the Query key to target in the same way as it is used in queries.
        * Note: Query key doesn't have to be exactly the same key. So, all the queries with that key pattern will be invalidated and immediately refetch/queries will be triggered.
        */
-      queryClient.invalidateQueries({ queryKey: ["events"] });
+      queryClient.invalidateQueries({
+        queryKey: ["events"],
+        refetchType: "none",
+      });
       navigate("/events");
     },
   });
