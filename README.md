@@ -2,8 +2,7 @@
 
 Navigate to below branches to understand about React:
 
-<details>
-<summary>Learn React.js - Step by Step</summary>
+## Learn React.js - Step by Step
 
 - [1-Get-Started](https://github.com/immanuala07/Learning-React/commits/1-Get-Started)
 - [2-First-Custom-Component](https://github.com/immanuala07/Learning-React/commits/2-First-Custom-Component)
@@ -288,9 +287,8 @@ Navigate to below branches to understand about React:
 - [281-React_Query_Or_Tanstack_Query--Using-the-Query-Key-As-Query-Function-Input](https://github.com/immanuala07/Learning-React/commits/281-React_Query_Or_Tanstack_Query--Using-the-Query-Key-As-Query-Function-Input)
 - [282-React_Query_Or_Tanstack_Query--React-Query-And-React-Router](https://github.com/immanuala07/Learning-React/commits/282-React_Query_Or_Tanstack_Query--React-Query-And-React-Router)
 
-</details>
 
-#### Useful links:
+## Useful links:
 
 - [React](https://legacy.reactjs.org/)
 - [React Redux](https://react-redux.js.org/)
